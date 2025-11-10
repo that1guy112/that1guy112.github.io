@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Customize Your Air - BreatheFree</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+	<style>
+		* {
+			font-family: 'Poppins', sans-serif !important;
+		}
+		
+		body {
+			background-color: #1a1a1a !important;
+			color: #ffffff !important;
+			margin: 0;
+			padding: 0;
+			position: relative;
+			min-height: 100vh;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+		
+		body.light-mode {
+			background-color: #f5f5f5 !important;
+			color: #1a1a1a !important;
+		}
+		
+		/* Background Slideshow */
+		.background-slideshow {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+			overflow: hidden;
+		}
+		
+		.slide {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			transition: opacity 2s ease-in-out;
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+		
+		.slide.active {
+			opacity: 0.4;
+		}
+		
+		.slide-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(to bottom, rgba(26, 26, 26, 0.4), rgba(26, 26, 26, 0.6));
+		}
+		
+		.body-wrap {
+			position: relative;
+			z-index: 1;
+			overflow: visible;
+		}
+		
+		.site-content {
+			overflow: visible;
+		}
+		
+		.site-header {
+			background-color: rgba(37, 37, 37, 0.95) !important;
+			backdrop-filter: blur(10px);
+			position: relative;
+			z-index: 10;
+			transition: background-color 0.3s ease;
+		}
+		
+		body.light-mode .site-header {
+			background-color: rgba(255, 255, 255, 0.95) !important;
+		}
+		
+		.site-footer {
+			background-color: rgba(37, 37, 37, 0.95) !important;
+			backdrop-filter: blur(10px);
+			position: relative;
+			z-index: 10;
+			margin-bottom: 100px;
+			transition: background-color 0.3s ease;
+		}
+		
+		body.light-mode .site-footer {
+			background-color: rgba(255, 255, 255, 0.95) !important;
+		}
+		
+		/* Theme Toggle Button */
+		.theme-toggle {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background-color: rgba(42, 42, 42, 0.9);
+			border: 2px solid #808080;
+			color: #ffffff;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 24px;
+			z-index: 1001;
+			transition: all 0.3s ease;
+			backdrop-filter: blur(10px);
+		}
+		
+		.theme-toggle:hover {
+			background-color: rgba(128, 128, 128, 0.9);
+			transform: scale(1.1);
+		}
+		
+		body.light-mode .theme-toggle {
+			background-color: rgba(245, 245, 245, 0.9);
+			border-color: #808080;
+			color: #1a1a1a;
+		}
+		
+		body.light-mode .theme-toggle:hover {
+			background-color: rgba(200, 200, 200, 0.9);
+		}
+		
+		.customization-container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 40px 20px;
+			position: relative;
+			overflow: visible;
+		}
+		
+		.header-section {
+			text-align: center;
+			margin-bottom: 60px;
+			padding-bottom: 30px;
+			border-bottom: 2px solid #333333;
+			transition: border-color 0.3s ease;
+		}
+		
+		body.light-mode .header-section {
+			border-bottom-color: #d0d0d0;
+		}
+		
+		.header-section h1 {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 48px;
+			margin-bottom: 16px;
+			color: #ffffff;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .header-section h1 {
+			color: #1a1a1a;
+		}
+		
+		.header-section p {
+			font-size: 18px;
+			color: rgba(255, 255, 255, 0.8);
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .header-section p {
+			color: rgba(26, 26, 26, 0.7);
+		}
+		
+		.customization-section {
+			background-color: #252525;
+			border: 1px solid #333333;
+			border-radius: 16px;
+			padding: 32px;
+			margin-bottom: 32px;
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		
+		body.light-mode .customization-section {
+			background-color: #ffffff;
+			border-color: #d0d0d0;
+		}
+		
+		.section-title {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 28px;
+			margin-bottom: 24px;
+			color: #ffffff;
+			border-bottom: 2px solid #444444;
+			padding-bottom: 12px;
+			transition: color 0.3s ease, border-color 0.3s ease;
+		}
+		
+		body.light-mode .section-title {
+			color: #1a1a1a;
+			border-bottom-color: #d0d0d0;
+		}
+		
+		.plan-options {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 24px;
+			margin-bottom: 24px;
+		}
+		
+		.plan-option {
+			border: 2px solid #444444;
+			border-radius: 12px;
+			padding: 24px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			background-color: #2a2a2a;
+		}
+		
+		body.light-mode .plan-option {
+			background-color: #ffffff !important;
+			border-color: #d0d0d0 !important;
+		}
+		
+		.plan-option:hover {
+			border-color: #808080;
+			transform: translateY(-4px);
+		}
+		
+		.plan-option.selected {
+			border-color: #808080;
+			background-color: #333333;
+		}
+		
+		body.light-mode .plan-option.selected {
+			background-color: #e8e8e8 !important;
+			border-color: #808080 !important;
+		}
+		
+		.plan-option h3 {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 24px;
+			margin-bottom: 12px;
+			color: #ffffff;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .plan-option h3 {
+			color: #1a1a1a !important;
+		}
+		
+		.plan-option .plan-price {
+			font-size: 32px;
+			font-weight: 700;
+			color: #ffffff;
+			margin-bottom: 8px;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .plan-option .plan-price {
+			color: #1a1a1a !important;
+		}
+		
+		.plan-option .plan-description {
+			font-size: 14px;
+			color: rgba(255, 255, 255, 0.7);
+			margin-bottom: 16px;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .plan-option .plan-description {
+			color: rgba(26, 26, 26, 0.7) !important;
+		}
+		
+		.plan-option .plan-features {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		
+		.plan-option .plan-features li {
+			font-size: 14px;
+			color: rgba(255, 255, 255, 0.9);
+			margin-bottom: 8px;
+			padding-left: 24px;
+			position: relative;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .plan-option .plan-features li {
+			color: rgba(26, 26, 26, 0.9) !important;
+		}
+		
+		.plan-option .plan-features li:before {
+			content: "✓";
+			position: absolute;
+			left: 0;
+			color: #808080;
+		}
+		
+		body.light-mode .plan-option .plan-features li:before {
+			color: #808080 !important;
+		}
+		
+		.scent-selection {
+			margin-bottom: 32px;
+		}
+		
+		.scent-item {
+			background-color: #2a2a2a;
+			border: 1px solid #444444;
+			border-radius: 12px;
+			padding: 20px;
+			margin-bottom: 20px;
+			position: relative;
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		
+		body.light-mode .scent-item {
+			background-color: #f9f9f9;
+			border-color: #d0d0d0;
+		}
+		
+		.view-notes-btn {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			padding: 8px 16px;
+			background-color: transparent;
+			border: 1px solid #808080;
+			border-radius: 6px;
+			color: #ffffff;
+			font-size: 12px;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			font-family: 'Poppins', sans-serif;
+			z-index: 10;
+		}
+		
+		.view-notes-btn:hover {
+			background-color: rgba(255, 255, 255, 0.1);
+			border-color: #A0A0A0;
+		}
+		
+		.scent-item-header {
+			padding-right: 120px;
+		}
+		
+		.scent-notes-modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.8);
+			z-index: 2000;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		.scent-notes-modal.active {
+			display: flex;
+		}
+		
+		.scent-notes-content {
+			background-color: #252525;
+			border: 2px solid #808080;
+			border-radius: 16px;
+			padding: 32px;
+			max-width: 500px;
+			width: 90%;
+			max-height: 80vh;
+			overflow-y: auto;
+			position: relative;
+		}
+		
+		.scent-notes-content h3 {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 24px;
+			margin-bottom: 8px;
+			color: #ffffff;
+		}
+		
+		.scent-notes-content h4 {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 18px;
+			margin-top: 24px;
+			margin-bottom: 12px;
+			color: #ffffff;
+		}
+		
+		.scent-notes-content ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		
+		.scent-notes-content li {
+			color: rgba(255, 255, 255, 0.9);
+			font-size: 14px;
+			line-height: 1.8;
+			margin-bottom: 8px;
+			padding-left: 20px;
+			position: relative;
+		}
+		
+		.scent-notes-content li:before {
+			content: "•";
+			position: absolute;
+			left: 0;
+			color: #ffffff;
+		}
+		
+		.close-notes-btn {
+			position: absolute;
+			top: 16px;
+			right: 16px;
+			width: 32px;
+			height: 32px;
+			border: 1px solid #808080;
+			background-color: transparent;
+			color: #ffffff;
+			border-radius: 50%;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 20px;
+			transition: all 0.2s ease;
+		}
+		
+		.close-notes-btn:hover {
+			background-color: rgba(255, 255, 255, 0.1);
+			border-color: #A0A0A0;
+		}
+		
+		.scent-item-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 16px;
+		}
+		
+		.scent-item-header h4 {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 20px;
+			margin: 0;
+			color: #ffffff;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .scent-item-header h4 {
+			color: #1a1a1a;
+		}
+		
+		.scent-item-header .scent-price {
+			font-size: 18px;
+			font-weight: 600;
+			color: #ffffff;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .scent-item-header .scent-price {
+			color: #1a1a1a;
+		}
+		
+		.quantity-controls {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			margin-bottom: 16px;
+		}
+		
+		.quantity-input {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+		
+		.quantity-btn {
+			width: 36px;
+			height: 36px;
+			border: 1px solid #555555;
+			background-color: #333333;
+			color: #ffffff;
+			border-radius: 6px;
+			cursor: pointer;
+			font-size: 18px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.2s ease;
+		}
+		
+		body.light-mode .quantity-btn {
+			background-color: #e8e8e8;
+			border-color: #d0d0d0;
+			color: #1a1a1a;
+		}
+		
+		.quantity-btn:hover {
+			background-color: #444444;
+			border-color: #808080;
+		}
+		
+		body.light-mode .quantity-btn:hover {
+			background-color: #d0d0d0;
+		}
+		
+		.quantity-value {
+			width: 60px;
+			height: 36px;
+			border: 1px solid #555555;
+			background-color: #2a2a2a;
+			color: #ffffff;
+			border-radius: 6px;
+			text-align: center;
+			font-size: 16px;
+			appearance: textfield;
+			-moz-appearance: textfield;
+			transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+		}
+		
+		body.light-mode .quantity-value {
+			background-color: #ffffff;
+			border-color: #d0d0d0;
+			color: #1a1a1a;
+		}
+		
+		.quantity-value::-webkit-outer-spin-button,
+		.quantity-value::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			appearance: none;
+			margin: 0;
+		}
+		
+		.intensity-selection {
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+		
+		.intensity-option {
+			flex: 1;
+			min-width: 100px;
+			padding: 12px;
+			border: 2px solid #444444;
+			border-radius: 8px;
+			text-align: center;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			background-color: #2a2a2a;
+		}
+		
+		body.light-mode .intensity-option {
+			background-color: #ffffff !important;
+			border-color: #d0d0d0 !important;
+		}
+		
+		.intensity-option:hover {
+			border-color: #808080;
+		}
+		
+		body.light-mode .intensity-option:hover {
+			border-color: #808080 !important;
+			background-color: #f0f0f0 !important;
+		}
+		
+		.intensity-option.selected {
+			border-color: #808080;
+			background-color: #333333;
+		}
+		
+		body.light-mode .intensity-option.selected {
+			background-color: #e8e8e8 !important;
+			border-color: #808080 !important;
+		}
+		
+		.intensity-option label {
+			display: block;
+			font-size: 14px;
+			color: #ffffff;
+			cursor: pointer;
+			margin-bottom: 4px;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .intensity-option label {
+			color: #1a1a1a !important;
+		}
+		
+		.intensity-option input {
+			display: none;
+		}
+		
+		.device-options, .merch-options {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 20px;
+		}
+		
+		.device-option, .merch-item {
+			border: 2px solid #444444;
+			border-radius: 12px;
+			padding: 20px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			background-color: #2a2a2a;
+		}
+		
+		body.light-mode .device-option,
+		body.light-mode .merch-item {
+			background-color: #f9f9f9;
+			border-color: #d0d0d0;
+		}
+		
+		.device-option:hover, .merch-item:hover {
+			border-color: #808080;
+			transform: translateY(-4px);
+		}
+		
+		.device-option.selected, .merch-item.selected {
+			border-color: #808080;
+			background-color: #333333;
+		}
+		
+		body.light-mode .device-option.selected,
+		body.light-mode .merch-item.selected {
+			background-color: #e8e8e8;
+		}
+		
+		.device-option h4, .merch-item h4 {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 20px;
+			margin-bottom: 8px;
+			color: #ffffff;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .device-option h4,
+		body.light-mode .merch-item h4 {
+			color: #1a1a1a;
+		}
+		
+		.device-option .device-price, .merch-item .merch-price {
+			font-size: 24px;
+			font-weight: 700;
+			color: #ffffff;
+			margin-bottom: 8px;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .device-option .device-price,
+		body.light-mode .merch-item .merch-price {
+			color: #1a1a1a;
+		}
+		
+		.device-option .device-description, .merch-item .merch-description {
+			font-size: 14px;
+			color: rgba(255, 255, 255, 0.7);
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .device-option .device-description,
+		body.light-mode .merch-item .merch-description {
+			color: rgba(26, 26, 26, 0.7);
+		}
+		
+		.checkbox-container {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			margin-top: 12px;
+		}
+		
+		.checkbox-container input[type="checkbox"] {
+			width: 20px;
+			height: 20px;
+			cursor: pointer;
+		}
+		
+		.summary-layout {
+			display: block;
+		}
+		
+		.customization-sections {
+			position: relative;
+			padding-bottom: 40px;
+		}
+		
+		/* Bottom Order Summary Strip */
+		.order-summary-strip {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background-color: rgba(42, 42, 42, 0.98);
+			backdrop-filter: blur(20px);
+			border-top: 2px solid #808080;
+			padding: 20px;
+			z-index: 1000;
+			box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.5);
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		
+		body.light-mode .order-summary-strip {
+			background-color: rgba(255, 255, 255, 0.98);
+			border-top-color: #808080;
+			box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
+		}
+		
+		.order-strip-item-label {
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .order-strip-item-label {
+			color: rgba(26, 26, 26, 0.7);
+		}
+		
+		.order-strip-item-value {
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .order-strip-item-value {
+			color: #1a1a1a;
+		}
+		
+		.order-strip-note {
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .order-strip-note {
+			color: rgba(26, 26, 26, 0.5);
+		}
+		
+		/* Light mode text colors */
+		body.light-mode {
+			color: #1a1a1a !important;
+		}
+		
+		body.light-mode p,
+		body.light-mode span,
+		body.light-mode label,
+		body.light-mode div {
+			color: #1a1a1a !important;
+		}
+		
+		body.light-mode .view-notes-btn {
+			color: #1a1a1a !important;
+			border-color: #808080 !important;
+		}
+		
+		body.light-mode .view-notes-btn:hover {
+			background-color: rgba(26, 26, 26, 0.1) !important;
+		}
+		
+		body.light-mode a {
+			color: #1a1a1a !important;
+		}
+		
+		body.light-mode a:hover {
+			color: #333333 !important;
+		}
+		
+		/* Ensure customization sections are white in light mode */
+		body.light-mode .customization-section {
+			background-color: #ffffff !important;
+			border-color: #d0d0d0 !important;
+		}
+		
+		/* Ensure scent items are properly styled in light mode */
+		body.light-mode .scent-item {
+			background-color: #ffffff !important;
+			border-color: #d0d0d0 !important;
+		}
+		
+		/* Brand link color */
+		.brand-link {
+			color: #ffffff !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .brand-link {
+			color: #1a1a1a !important;
+		}
+		
+		.order-strip-content {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 24px;
+			flex-wrap: wrap;
+		}
+		
+		.order-strip-left {
+			display: flex;
+			align-items: center;
+			gap: 32px;
+			flex-wrap: wrap;
+			flex: 1;
+		}
+		
+		.order-strip-item {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+		}
+		
+		.order-strip-item-label {
+			font-size: 12px;
+			color: rgba(255, 255, 255, 0.7);
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+		}
+		
+		.order-strip-item-value {
+			font-size: 16px;
+			font-weight: 600;
+			color: #ffffff;
+			white-space: nowrap;
+		}
+		
+		.order-strip-item-value.total {
+			font-size: 22px;
+			font-weight: 700;
+			font-family: 'Montserrat', sans-serif;
+		}
+		
+		.order-strip-right {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+		}
+		
+		.order-strip-button {
+			padding: 14px 32px;
+			background-color: #808080;
+			color: #ffffff;
+			border: none;
+			border-radius: 8px;
+			font-size: 16px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			font-family: 'Montserrat', sans-serif;
+			white-space: nowrap;
+		}
+		
+		.order-strip-button:hover {
+			background-color: #A0A0A0;
+			transform: translateY(-2px);
+		}
+		
+		.order-strip-button:disabled {
+			background-color: #555555;
+			cursor: not-allowed;
+			transform: none;
+			opacity: 0.6;
+		}
+		
+		.order-strip-note {
+			font-size: 10px;
+			color: rgba(255, 255, 255, 0.5);
+			text-align: right;
+		}
+		
+		@media (max-width: 968px) {
+			.order-strip-content {
+				flex-direction: column;
+				align-items: stretch;
+			}
+			
+			.order-strip-left {
+				justify-content: space-around;
+				gap: 20px;
+			}
+			
+			.order-strip-right {
+				width: 100%;
+				justify-content: center;
+			}
+			
+			.order-strip-button {
+				width: 100%;
+			}
+		}
+		
+		@media (max-width: 768px) {
+			.order-strip-left {
+				gap: 16px;
+			}
+			
+			.order-strip-item-value {
+				font-size: 16px;
+			}
+			
+			.order-strip-item-value.total {
+				font-size: 20px;
+			}
+			
+			.customization-sections {
+				margin-bottom: 140px;
+			}
+		}
+		
+		.empty-state {
+			text-align: center;
+			padding: 40px;
+			color: rgba(255, 255, 255, 0.6);
+			font-size: 16px;
+		}
+	</style>
+</head>
+	<body class="has-animations">
+	<!-- Theme Toggle Button -->
+	<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+		<span id="theme-icon">🌙</span>
+	</button>
+	
+	<!-- Background Slideshow -->
+	<div class="background-slideshow">
+		<div class="slide" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');" data-scent="mountain"></div>
+		<div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');" data-scent="ocean"></div>
+		<div class="slide" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');" data-scent="forest"></div>
+		<div class="slide" style="background-image: url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');" data-scent="desert"></div>
+		<div class="slide" style="background-image: url('https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');" data-scent="arctic"></div>
+		<div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');" data-scent="tropical"></div>
+		<div class="slide-overlay"></div>
+	</div>
+	<div class="body-wrap">
+		<header class="site-header invert-color">
+			<div class="container">
+				<div class="site-header-inner">
+					<div class="brand">
+						<h1 class="m-0">
+							<a href="index.html" class="brand-link" style="text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: 1px;">
+								BreatheFree
+							</a>
+						</h1>
+					</div>
+					<nav id="header-nav" class="header-nav">
+						<div class="header-nav-inner">
+							<ul class="list-reset header-nav-right">
+								<li>
+									<a class="button button-primary button-wide-mobile button-wide-mobile button-sm" href="index.html">Back to Home</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</header>
+		<main class="site-content">
+			<div class="customization-container">
+				<div class="header-section">
+					<h1>Customize Your Premium Air</h1>
+					<p>Create your perfect air collection with our customizable options</p>
+				</div>
+				
+				<div class="customization-sections">
+						<!-- Plan Selection -->
+						<div class="customization-section">
+							<h2 class="section-title">1. Choose Your Plan</h2>
+							<div class="plan-options">
+								<div class="plan-option" data-plan="starter" data-price="29">
+									<h3>Starter Plan</h3>
+									<div class="plan-price">$29/mo</div>
+									<div class="plan-description">Perfect for trying out premium air</div>
+									<ul class="plan-features">
+										<li>3 cans per month</li>
+										<li>Free shipping</li>
+										<li>Monthly delivery</li>
+									</ul>
+								</div>
+								<div class="plan-option" data-plan="premium" data-price="49">
+									<h3>Premium Plan</h3>
+									<div class="plan-price">$49/mo</div>
+									<div class="plan-description">Best value for regular users</div>
+									<ul class="plan-features">
+										<li>6 cans per month</li>
+										<li>Free express shipping</li>
+										<li>Bi-weekly delivery</li>
+										<li>Priority support</li>
+									</ul>
+								</div>
+								<div class="plan-option" data-plan="elite" data-price="79">
+									<h3>Elite Plan</h3>
+									<div class="plan-price">$79/mo</div>
+									<div class="plan-description">For air enthusiasts</div>
+									<ul class="plan-features">
+										<li>10 cans per month</li>
+										<li>Free express shipping</li>
+										<li>Weekly delivery</li>
+										<li>24/7 priority support</li>
+										<li>Exclusive limited editions</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Scent Selection -->
+						<div class="customization-section">
+							<h2 class="section-title">2. Select Your Scents</h2>
+							<p id="scent-description" style="color: rgba(255, 255, 255, 0.7); margin-bottom: 24px;">Choose how many cans of each scent you'd like. Select a plan first to see included cans.</p>
+							<div class="scent-selection" id="scent-selection">
+								<div class="scent-item" data-scent="mountain-peak" data-price="12">
+									<button class="view-notes-btn" onclick="showScentNotes('mountain-peak')">View Notes</button>
+									<div class="scent-item-header">
+										<h4>Mountain Peak Air</h4>
+										<span class="scent-price">$12/can</span>
+									</div>
+									<div class="quantity-controls">
+										<div class="quantity-input">
+											<button class="quantity-btn" onclick="changeQuantity('mountain-peak', -1)">−</button>
+											<input type="number" class="quantity-value" id="qty-mountain-peak" value="0" min="0" max="10" onchange="updateQuantity('mountain-peak', this.value)">
+											<button class="quantity-btn" onclick="changeQuantity('mountain-peak', 1)">+</button>
+										</div>
+										<span style="color: rgba(255, 255, 255, 0.7);">cans selected</span>
+									</div>
+									<div style="margin-top: 16px;">
+										<label style="display: block; margin-bottom: 8px; color: rgba(255, 255, 255, 0.9);">Scent Intensity:</label>
+										<div class="intensity-selection">
+											<div class="intensity-option" data-intensity="faint">
+												<input type="radio" name="intensity-mountain-peak" value="faint" id="faint-mountain-peak">
+												<label for="faint-mountain-peak">Faint</label>
+											</div>
+											<div class="intensity-option selected" data-intensity="normal">
+												<input type="radio" name="intensity-mountain-peak" value="normal" id="normal-mountain-peak" checked>
+												<label for="normal-mountain-peak">Normal</label>
+											</div>
+											<div class="intensity-option" data-intensity="strong">
+												<input type="radio" name="intensity-mountain-peak" value="strong" id="strong-mountain-peak">
+												<label for="strong-mountain-peak">Strong</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="scent-item" data-scent="ocean-breeze" data-price="12">
+									<button class="view-notes-btn" onclick="showScentNotes('ocean-breeze')">View Notes</button>
+									<div class="scent-item-header">
+										<h4>Ocean Breeze</h4>
+										<span class="scent-price">$12/can</span>
+									</div>
+									<div class="quantity-controls">
+										<div class="quantity-input">
+											<button class="quantity-btn" onclick="changeQuantity('ocean-breeze', -1)">−</button>
+											<input type="number" class="quantity-value" id="qty-ocean-breeze" value="0" min="0" max="10" onchange="updateQuantity('ocean-breeze', this.value)">
+											<button class="quantity-btn" onclick="changeQuantity('ocean-breeze', 1)">+</button>
+										</div>
+										<span style="color: rgba(255, 255, 255, 0.7);">cans selected</span>
+									</div>
+									<div style="margin-top: 16px;">
+										<label style="display: block; margin-bottom: 8px; color: rgba(255, 255, 255, 0.9);">Scent Intensity:</label>
+										<div class="intensity-selection">
+											<div class="intensity-option" data-intensity="faint">
+												<input type="radio" name="intensity-ocean-breeze" value="faint" id="faint-ocean-breeze">
+												<label for="faint-ocean-breeze">Faint</label>
+											</div>
+											<div class="intensity-option selected" data-intensity="normal">
+												<input type="radio" name="intensity-ocean-breeze" value="normal" id="normal-ocean-breeze" checked>
+												<label for="normal-ocean-breeze">Normal</label>
+											</div>
+											<div class="intensity-option" data-intensity="strong">
+												<input type="radio" name="intensity-ocean-breeze" value="strong" id="strong-ocean-breeze">
+												<label for="strong-ocean-breeze">Strong</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="scent-item" data-scent="forest-canopy" data-price="12">
+									<button class="view-notes-btn" onclick="showScentNotes('forest-canopy')">View Notes</button>
+									<div class="scent-item-header">
+										<h4>Forest Canopy</h4>
+										<span class="scent-price">$12/can</span>
+									</div>
+									<div class="quantity-controls">
+										<div class="quantity-input">
+											<button class="quantity-btn" onclick="changeQuantity('forest-canopy', -1)">−</button>
+											<input type="number" class="quantity-value" id="qty-forest-canopy" value="0" min="0" max="10" onchange="updateQuantity('forest-canopy', this.value)">
+											<button class="quantity-btn" onclick="changeQuantity('forest-canopy', 1)">+</button>
+										</div>
+										<span style="color: rgba(255, 255, 255, 0.7);">cans selected</span>
+									</div>
+									<div style="margin-top: 16px;">
+										<label style="display: block; margin-bottom: 8px; color: rgba(255, 255, 255, 0.9);">Scent Intensity:</label>
+										<div class="intensity-selection">
+											<div class="intensity-option" data-intensity="faint">
+												<input type="radio" name="intensity-forest-canopy" value="faint" id="faint-forest-canopy">
+												<label for="faint-forest-canopy">Faint</label>
+											</div>
+											<div class="intensity-option selected" data-intensity="normal">
+												<input type="radio" name="intensity-forest-canopy" value="normal" id="normal-forest-canopy" checked>
+												<label for="normal-forest-canopy">Normal</label>
+											</div>
+											<div class="intensity-option" data-intensity="strong">
+												<input type="radio" name="intensity-forest-canopy" value="strong" id="strong-forest-canopy">
+												<label for="strong-forest-canopy">Strong</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="scent-item" data-scent="desert-dawn" data-price="12">
+									<button class="view-notes-btn" onclick="showScentNotes('desert-dawn')">View Notes</button>
+									<div class="scent-item-header">
+										<h4>Desert Dawn</h4>
+										<span class="scent-price">$12/can</span>
+									</div>
+									<div class="quantity-controls">
+										<div class="quantity-input">
+											<button class="quantity-btn" onclick="changeQuantity('desert-dawn', -1)">−</button>
+											<input type="number" class="quantity-value" id="qty-desert-dawn" value="0" min="0" max="10" onchange="updateQuantity('desert-dawn', this.value)">
+											<button class="quantity-btn" onclick="changeQuantity('desert-dawn', 1)">+</button>
+										</div>
+										<span style="color: rgba(255, 255, 255, 0.7);">cans selected</span>
+									</div>
+									<div style="margin-top: 16px;">
+										<label style="display: block; margin-bottom: 8px; color: rgba(255, 255, 255, 0.9);">Scent Intensity:</label>
+										<div class="intensity-selection">
+											<div class="intensity-option" data-intensity="faint">
+												<input type="radio" name="intensity-desert-dawn" value="faint" id="faint-desert-dawn">
+												<label for="faint-desert-dawn">Faint</label>
+											</div>
+											<div class="intensity-option selected" data-intensity="normal">
+												<input type="radio" name="intensity-desert-dawn" value="normal" id="normal-desert-dawn" checked>
+												<label for="normal-desert-dawn">Normal</label>
+											</div>
+											<div class="intensity-option" data-intensity="strong">
+												<input type="radio" name="intensity-desert-dawn" value="strong" id="strong-desert-dawn">
+												<label for="strong-desert-dawn">Strong</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="scent-item" data-scent="arctic-fresh" data-price="12">
+									<button class="view-notes-btn" onclick="showScentNotes('arctic-fresh')">View Notes</button>
+									<div class="scent-item-header">
+										<h4>Arctic Fresh</h4>
+										<span class="scent-price">$12/can</span>
+									</div>
+									<div class="quantity-controls">
+										<div class="quantity-input">
+											<button class="quantity-btn" onclick="changeQuantity('arctic-fresh', -1)">−</button>
+											<input type="number" class="quantity-value" id="qty-arctic-fresh" value="0" min="0" max="10" onchange="updateQuantity('arctic-fresh', this.value)">
+											<button class="quantity-btn" onclick="changeQuantity('arctic-fresh', 1)">+</button>
+										</div>
+										<span style="color: rgba(255, 255, 255, 0.7);">cans selected</span>
+									</div>
+									<div style="margin-top: 16px;">
+										<label style="display: block; margin-bottom: 8px; color: rgba(255, 255, 255, 0.9);">Scent Intensity:</label>
+										<div class="intensity-selection">
+											<div class="intensity-option" data-intensity="faint">
+												<input type="radio" name="intensity-arctic-fresh" value="faint" id="faint-arctic-fresh">
+												<label for="faint-arctic-fresh">Faint</label>
+											</div>
+											<div class="intensity-option selected" data-intensity="normal">
+												<input type="radio" name="intensity-arctic-fresh" value="normal" id="normal-arctic-fresh" checked>
+												<label for="normal-arctic-fresh">Normal</label>
+											</div>
+											<div class="intensity-option" data-intensity="strong">
+												<input type="radio" name="intensity-arctic-fresh" value="strong" id="strong-arctic-fresh">
+												<label for="strong-arctic-fresh">Strong</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="scent-item" data-scent="tropical-paradise" data-price="12">
+									<button class="view-notes-btn" onclick="showScentNotes('tropical-paradise')">View Notes</button>
+									<div class="scent-item-header">
+										<h4>Tropical Paradise</h4>
+										<span class="scent-price">$12/can</span>
+									</div>
+									<div class="quantity-controls">
+										<div class="quantity-input">
+											<button class="quantity-btn" onclick="changeQuantity('tropical-paradise', -1)">−</button>
+											<input type="number" class="quantity-value" id="qty-tropical-paradise" value="0" min="0" max="10" onchange="updateQuantity('tropical-paradise', this.value)">
+											<button class="quantity-btn" onclick="changeQuantity('tropical-paradise', 1)">+</button>
+										</div>
+										<span style="color: rgba(255, 255, 255, 0.7);">cans selected</span>
+									</div>
+									<div style="margin-top: 16px;">
+										<label style="display: block; margin-bottom: 8px; color: rgba(255, 255, 255, 0.9);">Scent Intensity:</label>
+										<div class="intensity-selection">
+											<div class="intensity-option" data-intensity="faint">
+												<input type="radio" name="intensity-tropical-paradise" value="faint" id="faint-tropical-paradise">
+												<label for="faint-tropical-paradise">Faint</label>
+											</div>
+											<div class="intensity-option selected" data-intensity="normal">
+												<input type="radio" name="intensity-tropical-paradise" value="normal" id="normal-tropical-paradise" checked>
+												<label for="normal-tropical-paradise">Normal</label>
+											</div>
+											<div class="intensity-option" data-intensity="strong">
+												<input type="radio" name="intensity-tropical-paradise" value="strong" id="strong-tropical-paradise">
+												<label for="strong-tropical-paradise">Strong</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Air Dispenser Device -->
+						<div class="customization-section">
+							<h2 class="section-title">3. Optional Air Dispenser</h2>
+							<p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 24px;">Enhance your air experience with our premium dispensing device.</p>
+							<div class="device-options">
+								<div class="device-option" data-device="none" data-price="0">
+									<h4>No Device</h4>
+									<div class="device-price">$0</div>
+									<div class="device-description">Use cans directly</div>
+									<div class="checkbox-container">
+										<input type="checkbox" name="device" value="none" id="device-none" checked onchange="selectDevice('none', 0)">
+										<label for="device-none">Select</label>
+									</div>
+								</div>
+								<div class="device-option" data-device="basic" data-price="89">
+									<h4>Basic Dispenser</h4>
+									<div class="device-price">$89</div>
+									<div class="device-description">Simple, reliable air dispenser with adjustable flow control</div>
+									<div class="checkbox-container">
+										<input type="checkbox" name="device" value="basic" id="device-basic" onchange="selectDevice('basic', 89)">
+										<label for="device-basic">Select</label>
+									</div>
+								</div>
+								<div class="device-option" data-device="premium" data-price="149">
+									<h4>Premium Dispenser</h4>
+									<div class="device-price">$149</div>
+									<div class="device-description">Advanced dispenser with temperature control and scent mixing</div>
+									<div class="checkbox-container">
+										<input type="checkbox" name="device" value="premium" id="device-premium" onchange="selectDevice('premium', 149)">
+										<label for="device-premium">Select</label>
+									</div>
+								</div>
+								<div class="device-option" data-device="luxury" data-price="249">
+									<h4>Luxury Dispenser</h4>
+									<div class="device-price">$249</div>
+									<div class="device-description">Premium device with smart features, app control, and air quality monitoring</div>
+									<div class="checkbox-container">
+										<input type="checkbox" name="device" value="luxury" id="device-luxury" onchange="selectDevice('luxury', 249)">
+										<label for="device-luxury">Select</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Merchandise -->
+						<div class="customization-section">
+							<h2 class="section-title">4. Optional Merchandise</h2>
+							<p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 24px;">Complete your BreatheFree collection with our exclusive merch.</p>
+							<div class="merch-options">
+								<div class="merch-item" data-merch="t-shirt" data-price="29">
+									<h4>BreatheFree T-Shirt</h4>
+									<div class="merch-price">$29</div>
+									<div class="merch-description">Premium cotton t-shirt with BreatheFree logo</div>
+									<div class="checkbox-container">
+										<input type="checkbox" name="merch" value="t-shirt" id="merch-tshirt" onchange="toggleMerch('t-shirt', 29)">
+										<label for="merch-tshirt">Add to order</label>
+									</div>
+								</div>
+								<div class="merch-item" data-merch="hoodie" data-price="59">
+									<h4>BreatheFree Hoodie</h4>
+									<div class="merch-price">$59</div>
+									<div class="merch-description">Comfortable hoodie perfect for any season</div>
+									<div class="checkbox-container">
+										<input type="checkbox" name="merch" value="hoodie" id="merch-hoodie" onchange="toggleMerch('hoodie', 59)">
+										<label for="merch-hoodie">Add to order</label>
+									</div>
+								</div>
+								<div class="merch-item" data-merch="water-bottle" data-price="24">
+									<h4>Stainless Steel Bottle</h4>
+									<div class="merch-price">$24</div>
+									<div class="merch-description">Keep your beverages fresh with our premium bottle</div>
+									<div class="checkbox-container">
+										<input type="checkbox" name="merch" value="water-bottle" id="merch-bottle" onchange="toggleMerch('water-bottle', 24)">
+										<label for="merch-bottle">Add to order</label>
+									</div>
+								</div>
+								<div class="merch-item" data-merch="tote-bag" data-price="19">
+									<h4>Eco-Friendly Tote Bag</h4>
+									<div class="merch-price">$19</div>
+									<div class="merch-description">Carry your essentials in style</div>
+									<div class="checkbox-container">
+										<input type="checkbox" name="merch" value="tote-bag" id="merch-tote" onchange="toggleMerch('tote-bag', 19)">
+										<label for="merch-tote">Add to order</label>
+									</div>
+								</div>
+								<div class="merch-item" data-merch="cap" data-price="22">
+									<h4>BreatheFree Cap</h4>
+									<div class="merch-price">$22</div>
+									<div class="merch-description">Stylish cap with embroidered logo</div>
+									<div class="checkbox-container">
+										<input type="checkbox" name="merch" value="cap" id="merch-cap" onchange="toggleMerch('cap', 22)">
+										<label for="merch-cap">Add to order</label>
+									</div>
+								</div>
+								<div class="merch-item" data-merch="keychain" data-price="12">
+									<h4>Premium Keychain</h4>
+									<div class="merch-price">$12</div>
+									<div class="merch-description">Durable keychain with BreatheFree branding</div>
+									<div class="checkbox-container">
+										<input type="checkbox" name="merch" value="keychain" id="merch-keychain" onchange="toggleMerch('keychain', 12)">
+										<label for="merch-keychain">Add to order</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Bottom Order Summary Strip -->
+				<div class="order-summary-strip">
+					<div class="order-strip-content">
+						<div class="order-strip-left">
+							<div class="order-strip-item">
+								<span class="order-strip-item-label">Plan</span>
+								<span class="order-strip-item-value" id="strip-plan-price">$0</span>
+							</div>
+							<div class="order-strip-item">
+								<span class="order-strip-item-label" id="strip-cans-label">Air Cans</span>
+								<span class="order-strip-item-value" id="strip-cans-price">$0</span>
+							</div>
+							<div class="order-strip-item">
+								<span class="order-strip-item-label">Device</span>
+								<span class="order-strip-item-value" id="strip-device-price">$0</span>
+							</div>
+							<div class="order-strip-item">
+								<span class="order-strip-item-label">Merchandise</span>
+								<span class="order-strip-item-value" id="strip-merch-price">$0</span>
+							</div>
+							<div class="order-strip-item">
+								<span class="order-strip-item-label">Total</span>
+								<span class="order-strip-item-value total" id="strip-total-price">$0</span>
+							</div>
+						</div>
+						<div class="order-strip-right">
+							<div class="order-strip-note">*Monthly fees + one-time purchases</div>
+							<button class="order-strip-button" id="order-strip-button" onclick="placeOrder()" disabled>Place Order</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		
+		<!-- Scent Notes Modal -->
+		<div class="scent-notes-modal" id="scent-notes-modal" onclick="closeScentNotes(event)">
+			<div class="scent-notes-content" onclick="event.stopPropagation()">
+				<button class="close-notes-btn" onclick="closeScentNotes()">×</button>
+				<div id="scent-notes-body"></div>
+			</div>
+		</div>
+		
+		<footer class="site-footer invert-color">
+			<div class="container">
+				<div class="site-footer-inner">
+					<div class="footer-bottom space-between center-content-mobile text-xxs">
+						<div class="footer-copyright">&copy; 2025 BreatheFree, all rights reserved</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script src="js/main.min.js"></script>
+	<script>
+		let selectedPlan = null;
+		let selectedPlanPrice = 0;
+		let selectedDevice = 'none';
+		let selectedDevicePrice = 0;
+		let selectedMerch = {};
+		let scentQuantities = {
+			'mountain-peak': 0,
+			'ocean-breeze': 0,
+			'forest-canopy': 0,
+			'desert-dawn': 0,
+			'arctic-fresh': 0,
+			'tropical-paradise': 0
+		};
+		
+		// Plan selection (with deselect capability)
+		document.querySelectorAll('.plan-option').forEach(option => {
+			option.addEventListener('click', function() {
+				// Check if this plan is already selected
+				if (this.classList.contains('selected')) {
+					// Deselect the plan
+					this.classList.remove('selected');
+					selectedPlan = null;
+					selectedPlanPrice = 0;
+					
+					// Reset scent description
+					const descriptionEl = document.getElementById('scent-description');
+					if (descriptionEl) {
+						descriptionEl.textContent = 'Choose how many cans of each scent you\'d like. Select a plan first to see included cans.';
+					}
+				} else {
+					// Deselect all other plans first
+					document.querySelectorAll('.plan-option').forEach(opt => opt.classList.remove('selected'));
+					// Select this plan
+					this.classList.add('selected');
+					selectedPlan = this.dataset.plan;
+					selectedPlanPrice = parseInt(this.dataset.price);
+					
+					// Update scent description based on plan
+					const planIncludes = {
+						'starter': 3,
+						'premium': 6,
+						'elite': 10
+					};
+					const includedCans = planIncludes[selectedPlan] || 0;
+					const descriptionEl = document.getElementById('scent-description');
+					if (descriptionEl) {
+						descriptionEl.textContent = `Choose how many cans of each scent you'd like. Your plan includes ${includedCans} cans - additional cans are $12 each.`;
+					}
+				}
+				
+				updatePriceSummary();
+			});
+		});
+		
+		// Intensity selection
+		document.querySelectorAll('.intensity-option').forEach(option => {
+			option.addEventListener('click', function() {
+				const parent = this.closest('.scent-item');
+				parent.querySelectorAll('.intensity-option').forEach(opt => opt.classList.remove('selected'));
+				this.classList.add('selected');
+				this.querySelector('input').checked = true;
+			});
+		});
+		
+		// Quantity controls
+		function changeQuantity(scent, change) {
+			const input = document.getElementById('qty-' + scent);
+			const currentValue = parseInt(input.value) || 0;
+			const newValue = Math.max(0, Math.min(10, currentValue + change));
+			input.value = newValue;
+			scentQuantities[scent] = newValue;
+			updatePriceSummary();
+			updateBackgroundBasedOnSelection();
+		}
+		
+		function updateQuantity(scent, value) {
+			const numValue = Math.max(0, Math.min(10, parseInt(value) || 0));
+			document.getElementById('qty-' + scent).value = numValue;
+			scentQuantities[scent] = numValue;
+			updatePriceSummary();
+			updateBackgroundBasedOnSelection();
+		}
+		
+		// Device selection
+		function selectDevice(device, price) {
+			document.querySelectorAll('.device-option').forEach(opt => {
+				opt.classList.remove('selected');
+				opt.querySelector('input[type="checkbox"]').checked = false;
+			});
+			
+			const selectedOption = document.querySelector(`[data-device="${device}"]`);
+			if (selectedOption) {
+				selectedOption.classList.add('selected');
+				selectedOption.querySelector('input[type="checkbox"]').checked = true;
+			}
+			
+			selectedDevice = device;
+			selectedDevicePrice = price;
+			updatePriceSummary();
+		}
+		
+		// Merchandise selection
+		function toggleMerch(merch, price) {
+			const checkbox = document.getElementById('merch-' + (merch === 't-shirt' ? 'tshirt' : merch === 'water-bottle' ? 'bottle' : merch === 'tote-bag' ? 'tote' : merch));
+			const merchItem = document.querySelector(`[data-merch="${merch}"]`);
+			
+			if (checkbox.checked) {
+				selectedMerch[merch] = price;
+				merchItem.classList.add('selected');
+			} else {
+				delete selectedMerch[merch];
+				merchItem.classList.remove('selected');
+			}
+			updatePriceSummary();
+		}
+		
+		// Price calculation
+		function updatePriceSummary() {
+			const canPrice = 12;
+			let totalCans = 0;
+			let totalCansPrice = 0;
+			
+			// Get included cans based on plan
+			const planIncludes = {
+				'starter': 3,
+				'premium': 6,
+				'elite': 10
+			};
+			
+			const includedCans = selectedPlan ? (planIncludes[selectedPlan] || 0) : 0;
+			
+			// Count total cans
+			Object.keys(scentQuantities).forEach(scent => {
+				totalCans += scentQuantities[scent];
+			});
+			
+			// Calculate price for cans (only charge for cans beyond the included amount)
+			if (totalCans > includedCans) {
+				totalCansPrice = (totalCans - includedCans) * canPrice;
+			}
+			
+			let totalMerchPrice = 0;
+			Object.keys(selectedMerch).forEach(merch => {
+				totalMerchPrice += selectedMerch[merch];
+			});
+			
+			const total = selectedPlanPrice + totalCansPrice + selectedDevicePrice + totalMerchPrice;
+			
+			// Update strip prices with detailed breakdown
+			document.getElementById('strip-plan-price').textContent = selectedPlanPrice > 0 ? `$${selectedPlanPrice}/mo` : '$0';
+			
+			// Show cans breakdown: included vs paid
+			const cansLabelEl = document.getElementById('strip-cans-label');
+			if (selectedPlan && includedCans > 0) {
+				if (cansLabelEl) {
+					cansLabelEl.textContent = `Cans (${includedCans} incl.)`;
+				}
+				if (totalCans === 0) {
+					document.getElementById('strip-cans-price').textContent = `0/${includedCans}`;
+				} else if (totalCans <= includedCans) {
+					document.getElementById('strip-cans-price').textContent = `${totalCans}/${includedCans}`;
+				} else {
+					const extraCans = totalCans - includedCans;
+					document.getElementById('strip-cans-price').textContent = `+${extraCans} ($${totalCansPrice})`;
+				}
+			} else {
+				if (cansLabelEl) {
+					cansLabelEl.textContent = 'Air Cans';
+				}
+				if (totalCans > 0) {
+					document.getElementById('strip-cans-price').textContent = `${totalCans} × $${canPrice}`;
+				} else {
+					document.getElementById('strip-cans-price').textContent = '$0';
+				}
+			}
+			
+			document.getElementById('strip-device-price').textContent = selectedDevicePrice > 0 ? `$${selectedDevicePrice}` : '$0';
+			document.getElementById('strip-merch-price').textContent = totalMerchPrice > 0 ? `$${totalMerchPrice}` : '$0';
+			document.getElementById('strip-total-price').textContent = `$${total}`;
+			
+			// Enable order button if plan is selected
+			const orderButton = document.getElementById('order-strip-button');
+			if (selectedPlan) {
+				orderButton.disabled = false;
+			} else {
+				orderButton.disabled = true;
+			}
+		}
+		
+		// Place order
+		function placeOrder() {
+			if (!selectedPlan) {
+				alert('Please select a plan to continue.');
+				return;
+			}
+			
+			const totalCans = Object.values(scentQuantities).reduce((sum, qty) => sum + qty, 0);
+			// Note: Removed requirement for at least one can, as plans include cans
+			
+			// Collect order details
+			const orderDetails = {
+				plan: selectedPlan,
+				planPrice: selectedPlanPrice,
+				cans: scentQuantities,
+				device: selectedDevice,
+				devicePrice: selectedDevicePrice,
+				merchandise: selectedMerch,
+				total: parseInt(document.getElementById('strip-total-price').textContent.replace('$', ''))
+			};
+			
+			// In a real application, this would send the order to a server
+			console.log('Order placed:', orderDetails);
+			alert('Order placed successfully! Thank you for choosing BreatheFree.\n\nTotal: $' + orderDetails.total + '\n\n(A demo message - this would normally process your order)');
+		}
+		
+		// Background Slideshow
+		let currentSlide = 0;
+		let slideshowInterval = null;
+		const slides = document.querySelectorAll('.slide');
+		const totalSlides = slides.length;
+		
+		function showSlide(index) {
+			if (slides.length === 0) return;
+			slides.forEach((slide, i) => {
+				slide.classList.remove('active');
+				if (i === index) {
+					slide.classList.add('active');
+				}
+			});
+		}
+		
+		function nextSlide() {
+			if (slides.length === 0) return;
+			currentSlide = (currentSlide + 1) % totalSlides;
+			showSlide(currentSlide);
+		}
+		
+		// Change background based on selected scents
+		function updateBackgroundBasedOnSelection() {
+			if (slides.length === 0) return;
+			
+			// Find the scent with the highest quantity
+			let maxQty = 0;
+			let dominantScent = null;
+			const scentMap = {
+				'mountain-peak': 'mountain',
+				'ocean-breeze': 'ocean',
+				'forest-canopy': 'forest',
+				'desert-dawn': 'desert',
+				'arctic-fresh': 'arctic',
+				'tropical-paradise': 'tropical'
+			};
+			
+			Object.keys(scentQuantities).forEach(scent => {
+				if (scentQuantities[scent] > maxQty) {
+					maxQty = scentQuantities[scent];
+					dominantScent = scentMap[scent];
+				}
+			});
+			
+			if (dominantScent && maxQty > 0) {
+				// Stop automatic slideshow
+				if (slideshowInterval) {
+					clearInterval(slideshowInterval);
+					slideshowInterval = null;
+				}
+				
+				// Find and show the slide matching the dominant scent
+				slides.forEach((slide, index) => {
+					if (slide.dataset.scent === dominantScent) {
+						currentSlide = index;
+						showSlide(currentSlide);
+					}
+				});
+			} else {
+				// No scents selected, resume automatic slideshow
+				if (!slideshowInterval && slides.length > 0) {
+					slideshowInterval = setInterval(nextSlide, 5000);
+				}
+			}
+		}
+		
+		// Initialize slideshow
+		if (slides.length > 0) {
+			showSlide(0);
+			// Start automatic slideshow (changes every 5 seconds)
+			slideshowInterval = setInterval(nextSlide, 5000);
+		}
+		
+		// Scent Notes Data
+		const scentNotes = {
+			'mountain-peak': {
+				name: 'Mountain Peak Air',
+				notes: [
+					'Crisp Alpine Air',
+					'Fresh Pine Needles',
+					'Cool Snow Crystals',
+					'Mineral Undertones',
+					'Mountain Mist'
+				]
+			},
+			'ocean-breeze': {
+				name: 'Ocean Breeze',
+				notes: [
+					'Salty Sea Air',
+					'Marine Minerals',
+					'Coastal Flora',
+					'Fresh Ozone',
+					'Seaweed Essence'
+				]
+			},
+			'forest-canopy': {
+				name: 'Forest Canopy',
+				notes: [
+					'Earthy Moss',
+					'Cedar Wood',
+					'Pine Needles',
+					'Damp Forest Floor',
+					'Wild Herbs'
+				]
+			},
+			'desert-dawn': {
+				name: 'Desert Dawn',
+				notes: [
+					'Dry Mineral Notes',
+					'Warm Sand',
+					'Desert Blooms',
+					'Clear Sky',
+					'Sage Brush'
+				]
+			},
+			'arctic-fresh': {
+				name: 'Arctic Fresh',
+				notes: [
+					'Pure Ice Crystals',
+					'Crisp Cold Air',
+					'Pristine Snow',
+					'Fresh Tundra',
+					'Clean Mineral Notes'
+				]
+			},
+			'tropical-paradise': {
+				name: 'Tropical Paradise',
+				notes: [
+					'Exotic Flowers',
+					'Coconut Breeze',
+					'Palm Fronds',
+					'Ocean Mist',
+					'Tropical Fruits'
+				]
+			}
+		};
+		
+		// Show scent notes modal
+		function showScentNotes(scentId) {
+			const modal = document.getElementById('scent-notes-modal');
+			const body = document.getElementById('scent-notes-body');
+			const scent = scentNotes[scentId];
+			
+			if (scent && modal && body) {
+				body.innerHTML = `
+					<h3>${scent.name}</h3>
+					<h4>Scent Notes</h4>
+					<ul>
+						${scent.notes.map(note => `<li>${note}</li>`).join('')}
+					</ul>
+				`;
+				modal.classList.add('active');
+				document.body.style.overflow = 'hidden';
+			}
+		}
+		
+		// Close scent notes modal
+		function closeScentNotes(event) {
+			const modal = document.getElementById('scent-notes-modal');
+			if (!modal) return;
+			
+			if (event && event.type === 'click' && event.target.classList.contains('scent-notes-modal')) {
+				// Clicked on backdrop
+				modal.classList.remove('active');
+				document.body.style.overflow = '';
+			} else if (!event || (event.target && (event.target.classList.contains('close-notes-btn') || event.target.textContent === '×'))) {
+				// Clicked close button
+				modal.classList.remove('active');
+				document.body.style.overflow = '';
+			}
+		}
+		
+		// Close modal on Escape key
+		document.addEventListener('keydown', function(event) {
+			if (event.key === 'Escape') {
+				const modal = document.getElementById('scent-notes-modal');
+				if (modal && modal.classList.contains('active')) {
+					closeScentNotes();
+				}
+			}
+		});
+		
+		// Theme Toggle Functionality
+		function toggleTheme() {
+			const body = document.body;
+			const themeIcon = document.getElementById('theme-icon');
+			const isLightMode = body.classList.toggle('light-mode');
+			
+			// Update icon
+			if (themeIcon) {
+				themeIcon.textContent = isLightMode ? '☀️' : '🌙';
+			}
+			
+			// Save preference
+			localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+		}
+		
+		// Load saved theme preference
+		function loadTheme() {
+			const savedTheme = localStorage.getItem('theme');
+			const body = document.body;
+			const themeIcon = document.getElementById('theme-icon');
+			
+			if (savedTheme === 'light') {
+				body.classList.add('light-mode');
+				if (themeIcon) themeIcon.textContent = '☀️';
+			} else {
+				body.classList.remove('light-mode');
+				if (themeIcon) themeIcon.textContent = '🌙';
+			}
+		}
+		
+		// Initialize theme on page load
+		loadTheme();
+		
+	</script>
+</body>
+</html>

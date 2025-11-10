@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>BreatheFree - Premium Canned Air</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+	<style>
+		* {
+			font-family: 'Poppins', sans-serif !important;
+		}
+		
+		body {
+			background-color: #1a1a1a !important;
+			color: #ffffff !important;
+			position: relative;
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+		
+		body.light-mode {
+			background-color: #f5f5f5 !important;
+			color: #1a1a1a !important;
+		}
+		
+		body {
+			--noise-color-1: rgba(138, 43, 226, 0.45);
+			--noise-color-2: rgba(75, 0, 130, 0.4);
+			--noise-color-3: rgba(72, 61, 139, 0.35);
+			--noise-color-4: rgba(123, 104, 238, 0.42);
+			--noise-color-5: rgba(106, 90, 205, 0.4);
+			--noise-color-6: rgba(147, 112, 219, 0.38);
+			--noise-color-7: rgba(100, 149, 237, 0.4);
+			--noise-color-8: rgba(65, 105, 225, 0.42);
+			--noise-color-9: rgba(135, 206, 250, 0.38);
+			--noise-color-10: rgba(70, 130, 180, 0.4);
+			--noise-color-after-1: rgba(148, 0, 211, 0.4);
+			--noise-color-after-2: rgba(138, 43, 226, 0.42);
+			--noise-color-after-3: rgba(72, 61, 139, 0.38);
+			--noise-color-after-4: rgba(123, 104, 238, 0.4);
+			--noise-color-after-5: rgba(100, 149, 237, 0.42);
+		}
+		
+		body::before {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: 
+				radial-gradient(circle 800px at 15% 25%, var(--noise-color-1) 0%, transparent 60%),
+				radial-gradient(circle 900px at 85% 75%, var(--noise-color-2) 0%, transparent 60%),
+				radial-gradient(circle 1000px at 50% 50%, var(--noise-color-3) 0%, transparent 60%),
+				radial-gradient(circle 750px at 5% 85%, var(--noise-color-4) 0%, transparent 60%),
+				radial-gradient(circle 850px at 95% 15%, var(--noise-color-5) 0%, transparent 60%),
+				radial-gradient(circle 950px at 65% 5%, var(--noise-color-6) 0%, transparent 60%),
+				radial-gradient(circle 700px at 25% 65%, var(--noise-color-7) 0%, transparent 60%),
+				radial-gradient(circle 880px at 75% 95%, var(--noise-color-8) 0%, transparent 60%),
+				radial-gradient(circle 920px at 35% 15%, var(--noise-color-9) 0%, transparent 60%),
+				radial-gradient(circle 780px at 90% 60%, var(--noise-color-10) 0%, transparent 60%);
+			background-size: 300% 300%;
+			animation: noiseMove 25s ease-in-out infinite;
+			pointer-events: none;
+			z-index: 0;
+			opacity: 1;
+			transition: background 0.5s ease;
+		}
+		
+		body::after {
+			content: '';
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: 
+				radial-gradient(circle 900px at 30% 40%, var(--noise-color-after-1) 0%, transparent 60%),
+				radial-gradient(circle 850px at 70% 30%, var(--noise-color-after-2) 0%, transparent 60%),
+				radial-gradient(circle 950px at 20% 70%, var(--noise-color-after-3) 0%, transparent 60%),
+				radial-gradient(circle 800px at 80% 80%, var(--noise-color-after-4) 0%, transparent 60%),
+				radial-gradient(circle 920px at 45% 20%, var(--noise-color-after-5) 0%, transparent 60%);
+			background-size: 350% 350%;
+			animation: noiseMove2 30s ease-in-out infinite reverse;
+			pointer-events: none;
+			z-index: 0;
+			opacity: 1;
+			transition: background 0.5s ease;
+		}
+		
+		@keyframes noiseMove {
+			0% { background-position: 0% 0%; }
+			25% { background-position: 100% 50%; }
+			50% { background-position: 50% 100%; }
+			75% { background-position: 0% 50%; }
+			100% { background-position: 0% 0%; }
+		}
+		
+		@keyframes noiseMove2 {
+			0% { background-position: 50% 50%; }
+			33% { background-position: 0% 100%; }
+			66% { background-position: 100% 0%; }
+			100% { background-position: 50% 50%; }
+		}
+		
+		.body-wrap {
+			position: relative;
+			z-index: 1;
+			background-color: transparent !important;
+		}
+		
+		/* Theme Toggle Button */
+		.theme-toggle {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background-color: rgba(42, 42, 42, 0.9);
+			border: 2px solid #808080;
+			color: #ffffff;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 24px;
+			z-index: 1001;
+			transition: all 0.3s ease;
+			backdrop-filter: blur(10px);
+		}
+		
+		.theme-toggle:hover {
+			background-color: rgba(128, 128, 128, 0.9);
+			transform: scale(1.1);
+		}
+		
+		body.light-mode .theme-toggle {
+			background-color: rgba(245, 245, 245, 0.9);
+			border-color: #808080;
+			color: #1a1a1a;
+		}
+		
+		body.light-mode .theme-toggle:hover {
+			background-color: rgba(200, 200, 200, 0.9);
+		}
+		
+		h1, h2, h3, h4, h5, h6 {
+			color: #ffffff !important;
+			font-family: 'Montserrat', sans-serif !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode h1,
+		body.light-mode h2,
+		body.light-mode h3,
+		body.light-mode h4,
+		body.light-mode h5,
+		body.light-mode h6 {
+			color: #1a1a1a !important;
+		}
+		
+		p, span, div, a, li, td, th, label, input, button, label, figcaption {
+			color: #ffffff !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode p,
+		body.light-mode span,
+		body.light-mode div,
+		body.light-mode li,
+		body.light-mode td,
+		body.light-mode th,
+		body.light-mode label,
+		body.light-mode figcaption {
+			color: #1a1a1a !important;
+		}
+		
+		a {
+			color: #A0A0A0 !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode a {
+			color: #4a4a4a !important;
+		}
+		
+		a:hover {
+			color: #C0C0C0 !important;
+		}
+		
+		body.light-mode a:hover {
+			color: #1a1a1a !important;
+		}
+		
+		.text-color-high,
+		.text-color-mid {
+			color: #ffffff !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .text-color-high,
+		body.light-mode .text-color-mid {
+			color: #1a1a1a !important;
+		}
+		
+		.text-color-low {
+			color: rgba(255, 255, 255, 0.7) !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .text-color-low {
+			color: rgba(26, 26, 26, 0.7) !important;
+		}
+		
+		.has-bg-color {
+			background-color: #1a1a1a !important;
+			transition: background-color 0.3s ease;
+		}
+		
+		body.light-mode .has-bg-color {
+			background-color: #f5f5f5 !important;
+		}
+		
+		/* Override has-bg-color for leader section */
+		section.leader-section.has-bg-color,
+		.leader-section.has-bg-color,
+		section.news.section.leader-section.has-bg-color,
+		section.news.section.illustration-section-01.leader-section.has-bg-color,
+		body.light-mode section.leader-section.has-bg-color,
+		body.light-mode .leader-section.has-bg-color,
+		body.light-mode section.news.section.leader-section.has-bg-color,
+		body.light-mode section.news.section.illustration-section-01.leader-section.has-bg-color {
+			background-color: transparent !important;
+			background: transparent !important;
+		}
+		
+		.hero.section.has-bg-color {
+			background-color: transparent !important;
+		}
+		
+		.pricing.has-bg-color {
+			background-color: #1a1a1a !important;
+			transition: background-color 0.3s ease;
+		}
+		
+		body.light-mode .pricing.has-bg-color {
+			background-color: #f5f5f5 !important;
+		}
+		
+		.site-header,
+		.site-content,
+		.site-footer {
+			background-color: transparent !important;
+		}
+		
+		.invert-color {
+			background-color: #252525 !important;
+			transition: background-color 0.3s ease;
+		}
+		
+		body.light-mode .invert-color {
+			background-color: #ffffff !important;
+		}
+		
+		/* Override invert-color white background for leader section */
+		section.leader-section.invert-color,
+		.leader-section.invert-color,
+		section.news.section.leader-section.invert-color,
+		section.news.section.illustration-section-01.leader-section.invert-color,
+		body.light-mode section.leader-section.invert-color,
+		body.light-mode .leader-section.invert-color,
+		body.light-mode section.news.section.leader-section.invert-color,
+		body.light-mode section.news.section.illustration-section-01.leader-section.invert-color {
+			background-color: transparent !important;
+			background: transparent !important;
+		}
+		
+		.hero.section.invert-color {
+			background-color: transparent !important;
+		}
+		
+		.invert-color .text-color-high,
+		.invert-color .text-color-mid {
+			color: #ffffff !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .invert-color .text-color-high,
+		body.light-mode .invert-color .text-color-mid {
+			color: #1a1a1a !important;
+		}
+		
+		.invert-color .text-color-low {
+			color: rgba(255, 255, 255, 0.7) !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .invert-color .text-color-low {
+			color: rgba(26, 26, 26, 0.7) !important;
+		}
+		
+		.container,
+		.section {
+			background-color: transparent !important;
+		}
+		
+		
+		input.form-input {
+			background-color: #2a2a2a !important;
+			color: #ffffff !important;
+			border-color: #404040 !important;
+		}
+		
+		input.form-input::placeholder {
+			color: rgba(255, 255, 255, 0.5) !important;
+		}
+		
+		.tiles-item-inner {
+			background-color: #252525 !important;
+			border: 1px solid #333333 !important;
+			border-radius: 16px !important;
+			padding: 32px 24px !important;
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		
+		body.light-mode .tiles-item-inner {
+			background-color: #ffffff !important;
+			border-color: #d0d0d0 !important;
+		}
+		
+		body.light-mode .tiles-item-inner.has-shadow {
+			background-color: #ffffff !important;
+			border-color: #d0d0d0 !important;
+		}
+		
+		/* Flip card styles for scent tiles */
+		.tiles-item-inner[data-smell] {
+			position: relative;
+			overflow: hidden;
+		}
+		
+		.flip-card-container {
+			perspective: 1000px;
+			width: 100%;
+			height: 100%;
+			min-height: 200px;
+		}
+		
+		.flip-card {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			min-height: 200px;
+			transform-style: preserve-3d;
+			transition: transform 0.6s;
+			cursor: pointer;
+		}
+		
+		.flip-card.flipped {
+			transform: rotateY(180deg);
+		}
+		
+		.flip-card-front,
+		.flip-card-back {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			backface-visibility: hidden;
+			-webkit-backface-visibility: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			-webkit-transform-style: preserve-3d;
+			transform-style: preserve-3d;
+			transition: opacity 0.6s;
+		}
+		
+		.flip-card-front {
+			transform: rotateY(0deg) translateZ(1px);
+			z-index: 2;
+		}
+		
+		.flip-card-back {
+			transform: rotateY(180deg) translateZ(1px);
+			z-index: 1;
+		}
+		
+		.flip-card.flipped .flip-card-front {
+			z-index: 1;
+			opacity: 0;
+			pointer-events: none;
+		}
+		
+		.flip-card.flipped .flip-card-back {
+			z-index: 2;
+			opacity: 1;
+			pointer-events: auto;
+		}
+		
+		.flip-card:not(.flipped) .flip-card-front {
+			opacity: 1;
+			pointer-events: auto;
+		}
+		
+		.flip-card:not(.flipped) .flip-card-back {
+			opacity: 0;
+			pointer-events: none;
+		}
+		
+		.scent-notes {
+			text-align: center;
+			padding: 20px;
+		}
+		
+		.scent-notes h5 {
+			color: #ffffff !important;
+			font-family: 'Montserrat', sans-serif !important;
+			font-size: 18px;
+			margin-bottom: 16px;
+		}
+		
+		.scent-notes ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		
+		.scent-notes li {
+			color: rgba(255, 255, 255, 0.9) !important;
+			font-size: 14px;
+			line-height: 1.8;
+			margin-bottom: 8px;
+		}
+		
+		.features-tiles-item-content {
+			text-align: center !important;
+			width: 100%;
+			background: transparent;
+		}
+		
+		.features-tiles-item-content h4,
+		.features-tiles-item-content p {
+			color: #ffffff !important;
+			text-align: center !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .features-tiles-item-content h4,
+		body.light-mode .features-tiles-item-content p {
+			color: #1a1a1a !important;
+		}
+		
+		.scent-notes {
+			width: 100%;
+			background: transparent;
+		}
+		
+		body.light-mode .scent-notes h5 {
+			color: #1a1a1a !important;
+		}
+		
+		body.light-mode .scent-notes li {
+			color: rgba(26, 26, 26, 0.9) !important;
+		}
+		
+		.tiles-item-inner.has-shadow {
+			background-color: #252525 !important;
+			border: 1px solid #333333 !important;
+			border-radius: 16px !important;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+			padding: 32px 24px !important;
+			transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+		}
+		
+		body.light-mode .tiles-item-inner.has-shadow {
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+		}
+		
+		.tiles-item-inner img {
+			border-radius: 12px 12px 0 0 !important;
+		}
+		
+		.news-item-image img,
+		.features-tiles-item-image img {
+			border-radius: 12px !important;
+		}
+		
+		.news-item-content,
+		.pricing-item-content {
+			background-color: transparent !important;
+		}
+		
+		.news-item-content h3 a,
+		.news-item-content p {
+			color: #ffffff !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .news-item-content h3 a,
+		body.light-mode .news-item-content p {
+			color: #1a1a1a !important;
+		}
+		
+		.pricing-item-header,
+		.pricing-item-features {
+			background-color: transparent !important;
+		}
+		
+		.pricing-item-features-title {
+			color: #ffffff !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .pricing-item-features-title {
+			color: #1a1a1a !important;
+		}
+		
+		.pricing-item-features-list li {
+			color: rgba(255, 255, 255, 0.9) !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .pricing-item-features-list li {
+			color: rgba(26, 26, 26, 0.9) !important;
+		}
+		
+		.button-primary {
+			background-color: #606060 !important;
+			border-color: #606060 !important;
+			color: #ffffff !important;
+			transition: all 0.3s ease;
+		}
+		
+		.button-primary:hover {
+			background-color: #808080 !important;
+			border-color: #808080 !important;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+		}
+		
+		body.light-mode .button-primary {
+			background-color: #4a4a4a !important;
+			border-color: #4a4a4a !important;
+			color: #ffffff !important;
+		}
+		
+		body.light-mode .button-primary:hover {
+			background-color: #606060 !important;
+			border-color: #606060 !important;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+		}
+		
+		.button-dark {
+			background-color: #404040 !important;
+			border-color: #404040 !important;
+			color: #ffffff !important;
+			transition: all 0.3s ease;
+		}
+		
+		.button-dark:hover {
+			background-color: #505050 !important;
+			border-color: #505050 !important;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+		}
+		
+		body.light-mode .button-dark {
+			background-color: #6a6a6a !important;
+			border-color: #6a6a6a !important;
+			color: #ffffff !important;
+		}
+		
+		body.light-mode .button-dark:hover {
+			background-color: #808080 !important;
+			border-color: #808080 !important;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+		}
+		
+		.hero.section {
+			background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80') !important;
+			background-size: cover !important;
+			background-position: center center !important;
+			background-repeat: no-repeat !important;
+			background-attachment: fixed !important;
+			min-height: 100vh !important;
+			position: relative !important;
+			display: flex !important;
+			align-items: center !important;
+			justify-content: center !important;
+		}
+		
+		.hero.section::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(26, 26, 26, 0.4);
+			z-index: 0;
+		}
+		
+		.hero .container,
+		.hero .hero-inner,
+		.hero .section-inner {
+			position: relative;
+			z-index: 1;
+		}
+		
+		.hero-content {
+			background: rgba(26, 26, 26, 0.75) !important;
+			backdrop-filter: blur(10px) !important;
+			padding: 48px 32px !important;
+			border-radius: 16px !important;
+			margin: 0 auto !important;
+			max-width: 900px !important;
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+			transition: background 0.3s ease, box-shadow 0.3s ease;
+		}
+		
+		body.light-mode .hero-content {
+			background: rgba(255, 255, 255, 0.9) !important;
+			box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+		}
+		
+		body.light-mode .hero-content h1,
+		body.light-mode .hero-content p {
+			color: #1a1a1a !important;
+		}
+		
+		.hero-figure {
+			display: none !important;
+		}
+		
+		.cta.section {
+			background-color: transparent !important;
+		}
+		
+		.cta.section.has-bg-color {
+			background-color: transparent !important;
+		}
+		
+		.cta.section.invert-color {
+			background-color: transparent !important;
+		}
+		
+		/* Smell tile hover effects */
+		.tiles-item-inner[data-smell="mountain-peak"]:hover {
+			background-color: #6B8FA8 !important;
+			transition: background-color 0.3s ease !important;
+		}
+		
+		.tiles-item-inner[data-smell="ocean-breeze"]:hover {
+			background-color: #1E3A5F !important;
+			transition: background-color 0.3s ease !important;
+		}
+		
+		.tiles-item-inner[data-smell="forest-canopy"]:hover {
+			background-color: #2D5016 !important;
+			transition: background-color 0.3s ease !important;
+		}
+		
+		.tiles-item-inner[data-smell="desert-dawn"]:hover {
+			background-color: #8B6F47 !important;
+			transition: background-color 0.3s ease !important;
+		}
+		
+		.tiles-item-inner[data-smell="arctic-fresh"]:hover {
+			background-color: #4A90A4 !important;
+			transition: background-color 0.3s ease !important;
+		}
+		
+		.tiles-item-inner[data-smell="tropical-paradise"]:hover {
+			background-color: #1B6B5E !important;
+			transition: background-color 0.3s ease !important;
+		}
+		
+		.tiles-item-inner {
+			transition: background-color 0.3s ease !important;
+		}
+		
+		/* Perlin noise color changes on smell tile hover */
+		body:has(.tiles-item-inner[data-smell="mountain-peak"]:hover) {
+			--noise-color-1: rgba(107, 143, 168, 0.65);
+			--noise-color-2: rgba(107, 143, 168, 0.6);
+			--noise-color-3: rgba(107, 143, 168, 0.55);
+			--noise-color-4: rgba(107, 143, 168, 0.62);
+			--noise-color-5: rgba(107, 143, 168, 0.6);
+			--noise-color-6: rgba(107, 143, 168, 0.58);
+			--noise-color-7: rgba(107, 143, 168, 0.6);
+			--noise-color-8: rgba(107, 143, 168, 0.62);
+			--noise-color-9: rgba(107, 143, 168, 0.58);
+			--noise-color-10: rgba(107, 143, 168, 0.6);
+			--noise-color-after-1: rgba(107, 143, 168, 0.6);
+			--noise-color-after-2: rgba(107, 143, 168, 0.62);
+			--noise-color-after-3: rgba(107, 143, 168, 0.58);
+			--noise-color-after-4: rgba(107, 143, 168, 0.6);
+			--noise-color-after-5: rgba(107, 143, 168, 0.62);
+		}
+		
+		body:has(.tiles-item-inner[data-smell="ocean-breeze"]:hover) {
+			--noise-color-1: rgba(30, 58, 95, 0.65);
+			--noise-color-2: rgba(30, 58, 95, 0.6);
+			--noise-color-3: rgba(30, 58, 95, 0.55);
+			--noise-color-4: rgba(30, 58, 95, 0.62);
+			--noise-color-5: rgba(30, 58, 95, 0.6);
+			--noise-color-6: rgba(30, 58, 95, 0.58);
+			--noise-color-7: rgba(30, 58, 95, 0.6);
+			--noise-color-8: rgba(30, 58, 95, 0.62);
+			--noise-color-9: rgba(30, 58, 95, 0.58);
+			--noise-color-10: rgba(30, 58, 95, 0.6);
+			--noise-color-after-1: rgba(30, 58, 95, 0.6);
+			--noise-color-after-2: rgba(30, 58, 95, 0.62);
+			--noise-color-after-3: rgba(30, 58, 95, 0.58);
+			--noise-color-after-4: rgba(30, 58, 95, 0.6);
+			--noise-color-after-5: rgba(30, 58, 95, 0.62);
+		}
+		
+		body:has(.tiles-item-inner[data-smell="forest-canopy"]:hover) {
+			--noise-color-1: rgba(45, 80, 22, 0.65);
+			--noise-color-2: rgba(45, 80, 22, 0.6);
+			--noise-color-3: rgba(45, 80, 22, 0.55);
+			--noise-color-4: rgba(45, 80, 22, 0.62);
+			--noise-color-5: rgba(45, 80, 22, 0.6);
+			--noise-color-6: rgba(45, 80, 22, 0.58);
+			--noise-color-7: rgba(45, 80, 22, 0.6);
+			--noise-color-8: rgba(45, 80, 22, 0.62);
+			--noise-color-9: rgba(45, 80, 22, 0.58);
+			--noise-color-10: rgba(45, 80, 22, 0.6);
+			--noise-color-after-1: rgba(45, 80, 22, 0.6);
+			--noise-color-after-2: rgba(45, 80, 22, 0.62);
+			--noise-color-after-3: rgba(45, 80, 22, 0.58);
+			--noise-color-after-4: rgba(45, 80, 22, 0.6);
+			--noise-color-after-5: rgba(45, 80, 22, 0.62);
+		}
+		
+		body:has(.tiles-item-inner[data-smell="desert-dawn"]:hover) {
+			--noise-color-1: rgba(139, 111, 71, 0.65);
+			--noise-color-2: rgba(139, 111, 71, 0.6);
+			--noise-color-3: rgba(139, 111, 71, 0.55);
+			--noise-color-4: rgba(139, 111, 71, 0.62);
+			--noise-color-5: rgba(139, 111, 71, 0.6);
+			--noise-color-6: rgba(139, 111, 71, 0.58);
+			--noise-color-7: rgba(139, 111, 71, 0.6);
+			--noise-color-8: rgba(139, 111, 71, 0.62);
+			--noise-color-9: rgba(139, 111, 71, 0.58);
+			--noise-color-10: rgba(139, 111, 71, 0.6);
+			--noise-color-after-1: rgba(139, 111, 71, 0.6);
+			--noise-color-after-2: rgba(139, 111, 71, 0.62);
+			--noise-color-after-3: rgba(139, 111, 71, 0.58);
+			--noise-color-after-4: rgba(139, 111, 71, 0.6);
+			--noise-color-after-5: rgba(139, 111, 71, 0.62);
+		}
+		
+		body:has(.tiles-item-inner[data-smell="arctic-fresh"]:hover) {
+			--noise-color-1: rgba(74, 144, 164, 0.65);
+			--noise-color-2: rgba(74, 144, 164, 0.6);
+			--noise-color-3: rgba(74, 144, 164, 0.55);
+			--noise-color-4: rgba(74, 144, 164, 0.62);
+			--noise-color-5: rgba(74, 144, 164, 0.6);
+			--noise-color-6: rgba(74, 144, 164, 0.58);
+			--noise-color-7: rgba(74, 144, 164, 0.6);
+			--noise-color-8: rgba(74, 144, 164, 0.62);
+			--noise-color-9: rgba(74, 144, 164, 0.58);
+			--noise-color-10: rgba(74, 144, 164, 0.6);
+			--noise-color-after-1: rgba(74, 144, 164, 0.6);
+			--noise-color-after-2: rgba(74, 144, 164, 0.62);
+			--noise-color-after-3: rgba(74, 144, 164, 0.58);
+			--noise-color-after-4: rgba(74, 144, 164, 0.6);
+			--noise-color-after-5: rgba(74, 144, 164, 0.62);
+		}
+		
+		body:has(.tiles-item-inner[data-smell="tropical-paradise"]:hover) {
+			--noise-color-1: rgba(27, 107, 94, 0.65);
+			--noise-color-2: rgba(27, 107, 94, 0.6);
+			--noise-color-3: rgba(27, 107, 94, 0.55);
+			--noise-color-4: rgba(27, 107, 94, 0.62);
+			--noise-color-5: rgba(27, 107, 94, 0.6);
+			--noise-color-6: rgba(27, 107, 94, 0.58);
+			--noise-color-7: rgba(27, 107, 94, 0.6);
+			--noise-color-8: rgba(27, 107, 94, 0.62);
+			--noise-color-9: rgba(27, 107, 94, 0.58);
+			--noise-color-10: rgba(27, 107, 94, 0.6);
+			--noise-color-after-1: rgba(27, 107, 94, 0.6);
+			--noise-color-after-2: rgba(27, 107, 94, 0.62);
+			--noise-color-after-3: rgba(27, 107, 94, 0.58);
+			--noise-color-after-4: rgba(27, 107, 94, 0.6);
+			--noise-color-after-5: rgba(27, 107, 94, 0.62);
+		}
+		
+		/* Responsive layout for Meet the Leader section */
+		@media (max-width: 768px) {
+			.leader-layout {
+				grid-template-columns: 1fr !important;
+			}
+			
+			.leader-layout > div:last-child > div {
+				column-count: 1 !important;
+			}
+		}
+		
+		/* Leader section - theme matching */
+		section.leader-section,
+		.leader-section,
+		section.news.section.leader-section,
+		section.news.section.illustration-section-01.leader-section {
+			background-color: transparent !important;
+			background: transparent !important;
+		}
+		
+		.leader-section::after,
+		section.leader-section::after,
+		section.news.section.leader-section::after {
+			display: none !important;
+			background: none !important;
+			background-image: none !important;
+		}
+		
+		.illustration-section-01,
+		section.illustration-section-01,
+		section.news.section.illustration-section-01 {
+			background-color: transparent !important;
+			background: transparent !important;
+		}
+		
+		.illustration-section-01::after,
+		section.illustration-section-01::after,
+		section.news.section.illustration-section-01::after,
+		section.news.section.illustration-section-01.leader-section::after,
+		section.leader-section.illustration-section-01::after {
+			display: none !important;
+			background: none !important;
+			background-image: none !important;
+			background-color: transparent !important;
+			content: none !important;
+			opacity: 0 !important;
+			visibility: hidden !important;
+			height: 0 !important;
+			width: 0 !important;
+		}
+		
+		body.light-mode .illustration-section-01,
+		body.light-mode section.illustration-section-01,
+		body.light-mode section.news.section.illustration-section-01,
+		/* Leader section - matches other sections, transparent background for Perlin noise */
+		section.leader-section,
+		.leader-section {
+			background-color: transparent !important;
+			background: transparent !important;
+		}
+		
+		body.light-mode section.leader-section,
+		body.light-mode .leader-section {
+			background-color: transparent !important;
+			background: transparent !important;
+		}
+		
+		.leader-header {
+			color: #ffffff !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .leader-header {
+			color: #1a1a1a !important;
+		}
+		
+		.leader-description {
+			color: rgba(255, 255, 255, 0.8) !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .leader-description {
+			color: rgba(26, 26, 26, 0.8) !important;
+		}
+		
+		.leader-image {
+			border-radius: 50%;
+			object-fit: cover;
+			border: 4px solid #333333;
+			transition: border-color 0.3s ease;
+		}
+		
+		body.light-mode .leader-image {
+			border-color: #d0d0d0;
+		}
+		
+		.leader-name {
+			font-family: 'Montserrat', sans-serif;
+			color: #ffffff !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .leader-name {
+			color: #1a1a1a !important;
+		}
+		
+		.interview-snippet-container {
+			padding: 48px 32px;
+			max-width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			background-color: transparent !important;
+			transition: background-color 0.3s ease;
+		}
+		
+		body.light-mode .interview-snippet-container {
+			background-color: transparent !important;
+		}
+		
+		.interview-title {
+			font-family: 'Montserrat', sans-serif;
+			color: #ffffff !important;
+			margin-top: 0;
+			margin-bottom: 24px;
+			font-size: 24px;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .interview-title {
+			color: #1a1a1a !important;
+		}
+		
+		.interview-text {
+			line-height: 1.8;
+			font-size: 16px;
+			max-width: none;
+			column-count: 2;
+			column-gap: 32px;
+			transition: color 0.3s ease;
+			color: rgba(255, 255, 255, 0.9) !important;
+		}
+		
+		body.light-mode .interview-text {
+			color: rgba(26, 26, 26, 0.9) !important;
+		}
+		
+		.interview-text p {
+			margin-bottom: 16px;
+			break-inside: avoid;
+			transition: color 0.3s ease;
+			color: rgba(255, 255, 255, 0.9) !important;
+		}
+		
+		.interview-text p:first-child {
+			font-style: italic;
+			color: rgba(255, 255, 255, 0.8) !important;
+		}
+		
+		body.light-mode .interview-text p:first-child {
+			color: rgba(26, 26, 26, 0.8) !important;
+		}
+		
+		body.light-mode .interview-text p:not(:first-child) {
+			color: rgba(26, 26, 26, 0.9) !important;
+		}
+		
+		.interview-text p:last-child {
+			margin-bottom: 0;
+		}
+		
+		/* Light mode adjustments for Perlin noise */
+		body.light-mode::before,
+		body.light-mode::after {
+			opacity: 0.6;
+		}
+		
+		body.light-mode {
+			--noise-color-1: rgba(138, 43, 226, 0.35);
+			--noise-color-2: rgba(75, 0, 130, 0.3);
+			--noise-color-3: rgba(72, 61, 139, 0.25);
+			--noise-color-4: rgba(123, 104, 238, 0.32);
+			--noise-color-5: rgba(106, 90, 205, 0.3);
+			--noise-color-6: rgba(147, 112, 219, 0.28);
+			--noise-color-7: rgba(100, 149, 237, 0.3);
+			--noise-color-8: rgba(65, 105, 225, 0.32);
+			--noise-color-9: rgba(135, 206, 250, 0.28);
+			--noise-color-10: rgba(70, 130, 180, 0.3);
+			--noise-color-after-1: rgba(148, 0, 211, 0.3);
+			--noise-color-after-2: rgba(138, 43, 226, 0.32);
+			--noise-color-after-3: rgba(72, 61, 139, 0.28);
+			--noise-color-after-4: rgba(123, 104, 238, 0.3);
+			--noise-color-after-5: rgba(100, 149, 237, 0.32);
+		}
+		
+		/* Light mode hero overlay */
+		body.light-mode .hero.section::before {
+			background: rgba(245, 245, 245, 0.3);
+		}
+		
+		/* Brand link color */
+		.brand-link {
+			color: #ffffff !important;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .brand-link {
+			color: #1a1a1a !important;
+		}
+		
+		/* Fix inline styles for light mode */
+		body.light-mode [style*="color: #ffffff"],
+		body.light-mode [style*="color: #333333"],
+		body.light-mode [style*="color: #444444"] {
+			color: #1a1a1a !important;
+		}
+	</style>
+</head>
+<body class="has-animations">
+	<!-- Theme Toggle Button -->
+	<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+		<span id="theme-icon">🌙</span>
+	</button>
+	
+	<div class="body-wrap">
+		<header class="site-header invert-color">
+			<div class="container">
+				<div class="site-header-inner">
+					<div class="brand">
+						<h1 class="m-0">
+							<a href="index.html" class="brand-link" style="text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: 1px;">
+								BreatheFree
+							</a>
+						</h1>
+					</div>
+					<button id="header-nav-toggle" class="header-nav-toggle" aria-controls="primary-menu" aria-expanded="false">
+						<span class="screen-reader">Menu</span>
+						<span class="hamburger">
+							<span class="hamburger-inner"></span>
+						</span>
+					</button>
+					<nav id="header-nav" class="header-nav">
+						<div class="header-nav-inner">
+							<ul class="list-reset header-nav-right">
+								<li>
+									<a class="button button-primary button-wide-mobile button-wide-mobile button-sm" href="#pricing">Order now</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</header>
+		<main class="site-content">
+			<section class="hero section has-bg-color invert-color">
+				<div class="container">
+					<div class="hero-inner section-inner">
+						<div class="hero-content center-content reveal-from-top" style="text-align: center; margin-bottom: 48px;">
+							<h1 class="mt-0 mb-16">Experience the Purest Air on Earth</h1>
+							<p class="mt-0 mb-32" style="max-width: 800px; margin-left: auto; margin-right: auto;">BreatheFree delivers premium canned air sourced from the world's most pristine locations. Every breath is a luxury experience, captured at the peak of freshness.</p>
+							<div class="button-group">
+								<a class="button button-primary button-wide-mobile" href="#pricing">Pricing and plans</a>
+								<a class="button button-dark button-wide-mobile" href="additional.html">Customize your selection</a>
+							</div>
+						</div>
+						<div class="hero-figure center-content reveal-from-bottom" style="text-align: center;">
+							<img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=896&q=80" alt="Alps Mountains" width="896" height="504" style="max-width: 100%; height: auto; border-radius: 12px;">
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="section">
+				<div class="container">
+					<div class="section-inner">
+						<div class="section-header center-content">
+							<div class="container-xs">
+								<h2 class="mt-0 mb-16" style="font-size: 42px; font-family: 'Montserrat', sans-serif; color: #ffffff;">Who are we?</h2>
+								<p class="m-0" style="font-size: 18px; color: rgba(255, 255, 255, 0.9); line-height: 1.6; max-width: 800px; margin: 0 auto;">BreatheFree is a pioneering company dedicated to bringing the world's purest air directly to you. Founded with a vision to bridge the gap between our increasingly digital lives and the fundamental need for natural, pristine air, we combine cutting-edge AI technology with traditional sourcing methods to deliver premium canned air from the most untouched locations on Earth. Our mission is to make the luxury of breathing truly fresh, natural air accessible to everyone, regardless of where they live or work.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="features-tiles section">
+				<div class="container">
+					<div class="features-tiles-inner section-inner">
+						<div class="section-header center-content" style="margin-bottom: 48px;">
+							<div class="container-xs">
+								<h2 class="mt-0 mb-16" style="font-size: 42px; font-family: 'Montserrat', sans-serif; color: #ffffff;">Our Premium Air Collection</h2>
+								<p class="m-0" style="font-size: 18px; color: rgba(255, 255, 255, 0.9); line-height: 1.6;">Discover our exquisite range of premium canned air, each sourced from the world's most pristine locations. From the crisp peaks of the Swiss Alps to the refreshing ocean breezes of untouched coastlines, BreatheFree offers six distinct air varieties that capture the essence of nature's purest environments. Each can is carefully collected, tested, and packaged to deliver an unparalleled breathing experience.</p>
+							</div>
+						</div>
+						<div class="tiles-wrap">
+							<div class="tiles-item reveal-from-bottom" data-reveal-container=".tiles-wrap">
+								<div class="tiles-item-inner" data-smell="mountain-peak" style="min-height: 200px;">
+									<div class="flip-card-container">
+										<div class="flip-card" onclick="this.classList.toggle('flipped')">
+											<div class="flip-card-front">
+												<div class="features-tiles-item-content">
+													<h4 class="mt-0 mb-8">Mountain Peak Air</h4>
+													<p class="m-0 text-sm">Captured from the highest peaks of the Swiss Alps, our mountain air offers crisp, invigorating freshness with every breath.</p>
+												</div>
+											</div>
+											<div class="flip-card-back">
+												<div class="scent-notes">
+													<h5>Scent Notes</h5>
+													<ul>
+														<li>• Crisp Alpine Air</li>
+														<li>• Fresh Pine Needles</li>
+														<li>• Cool Snow Crystals</li>
+														<li>• Mineral Undertones</li>
+														<li>• Mountain Mist</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tiles-item reveal-from-bottom" data-reveal-container=".tiles-wrap" data-reveal-delay="100">
+								<div class="tiles-item-inner" data-smell="ocean-breeze" style="min-height: 200px;">
+									<div class="flip-card-container">
+										<div class="flip-card" onclick="this.classList.toggle('flipped')">
+											<div class="flip-card-front">
+												<div class="features-tiles-item-content">
+													<h4 class="mt-0 mb-8">Ocean Breeze</h4>
+													<p class="m-0 text-sm">Fresh coastal air from pristine beaches, enriched with natural sea minerals for a revitalizing breathing experience.</p>
+												</div>
+											</div>
+											<div class="flip-card-back">
+												<div class="scent-notes">
+													<h5>Scent Notes</h5>
+													<ul>
+														<li>• Salty Sea Air</li>
+														<li>• Marine Minerals</li>
+														<li>• Coastal Flora</li>
+														<li>• Fresh Ozone</li>
+														<li>• Seaweed Essence</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tiles-item reveal-from-bottom" data-reveal-container=".tiles-wrap" data-reveal-delay="200">
+								<div class="tiles-item-inner" data-smell="forest-canopy" style="min-height: 200px;">
+									<div class="flip-card-container">
+										<div class="flip-card" onclick="this.classList.toggle('flipped')">
+											<div class="flip-card-front">
+												<div class="features-tiles-item-content">
+													<h4 class="mt-0 mb-8">Forest Canopy</h4>
+													<p class="m-0 text-sm">Sourced from ancient forests, our woodland air contains natural phytoncides for enhanced wellness and clarity.</p>
+												</div>
+											</div>
+											<div class="flip-card-back">
+												<div class="scent-notes">
+													<h5>Scent Notes</h5>
+													<ul>
+														<li>• Earthy Moss</li>
+														<li>• Cedar Wood</li>
+														<li>• Pine Needles</li>
+														<li>• Damp Forest Floor</li>
+														<li>• Wild Herbs</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tiles-item reveal-from-bottom" data-reveal-container=".tiles-wrap" data-reveal-delay="300">
+								<div class="tiles-item-inner" data-smell="desert-dawn" style="min-height: 200px;">
+									<div class="flip-card-container">
+										<div class="flip-card" onclick="this.classList.toggle('flipped')">
+											<div class="flip-card-front">
+												<div class="features-tiles-item-content">
+													<h4 class="mt-0 mb-8">Desert Dawn</h4>
+													<p class="m-0 text-sm">Pure, dry air captured at sunrise in remote desert locations, offering a unique and refreshing breathing experience.</p>
+												</div>
+											</div>
+											<div class="flip-card-back">
+												<div class="scent-notes">
+													<h5>Scent Notes</h5>
+													<ul>
+														<li>• Dry Mineral Notes</li>
+														<li>• Warm Sand</li>
+														<li>• Desert Blooms</li>
+														<li>• Clear Sky</li>
+														<li>• Sage Brush</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tiles-item reveal-from-bottom" data-reveal-container=".tiles-wrap" data-reveal-delay="400">
+								<div class="tiles-item-inner" data-smell="arctic-fresh" style="min-height: 200px;">
+									<div class="flip-card-container">
+										<div class="flip-card" onclick="this.classList.toggle('flipped')">
+											<div class="flip-card-front">
+												<div class="features-tiles-item-content">
+													<h4 class="mt-0 mb-8">Arctic Fresh</h4>
+													<p class="m-0 text-sm">Ultra-pure air from the Arctic tundra, filtered through pristine ice formations for the cleanest breath possible.</p>
+												</div>
+											</div>
+											<div class="flip-card-back">
+												<div class="scent-notes">
+													<h5>Scent Notes</h5>
+													<ul>
+														<li>• Pure Ice Crystals</li>
+														<li>• Crisp Air</li>
+														<li>• Minty Freshness</li>
+														<li>• Zero Pollutants</li>
+														<li>• Polar Breeze</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tiles-item reveal-from-bottom" data-reveal-container=".tiles-wrap" data-reveal-delay="500">
+								<div class="tiles-item-inner" data-smell="tropical-paradise" style="min-height: 200px;">
+									<div class="flip-card-container">
+										<div class="flip-card" onclick="this.classList.toggle('flipped')">
+											<div class="flip-card-front">
+												<div class="features-tiles-item-content">
+													<h4 class="mt-0 mb-8">Tropical Paradise</h4>
+													<p class="m-0 text-sm">Exotic air from remote tropical islands, naturally enriched with floral essences for a luxurious breathing experience.</p>
+												</div>
+											</div>
+											<div class="flip-card-back">
+												<div class="scent-notes">
+													<h5>Scent Notes</h5>
+													<ul>
+														<li>• Exotic Florals</li>
+														<li>• Coconut Essence</li>
+														<li>• Tropical Fruits</li>
+														<li>• Warm Humidity</li>
+														<li>• Palm Fronds</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="features-tabs section center-content has-bottom-divider">
+				<div class="container">
+					<div class="features-tabs-inner section-inner has-top-divider">
+						<div class="section-header center-content">
+							<div class="container-xs">
+								<h2 class="mt-0 mb-16">Premium air, perfected for you</h2>
+								<p class="m-0">Each can of BreatheFree air is carefully sourced, tested, and packaged to ensure the highest quality. Experience the difference that premium air makes in your daily life.</p>
+							</div>
+						</div>
+						<div class="tabs">
+							<ul class="tab-list list-reset mb-0">
+								<li class="tab is-active" role="tab" aria-controls="tab-a">
+									<div class="text-color-high fw-600 text-sm">Pure Sourcing</div>
+								</li>
+								<li class="tab" role="tab" aria-controls="tab-b">
+									<div class="text-color-high fw-600 text-sm">Quality Testing</div>
+								</li>
+								<li class="tab" role="tab" aria-controls="tab-c">
+									<div class="text-color-high fw-600 text-sm">Premium Packaging</div>
+								</li>
+								<li class="tab" role="tab" aria-controls="tab-d">
+									<div class="text-color-high fw-600 text-sm">Fresh Delivery</div>
+								</li>
+							</ul>
+							<div id="tab-a" class="tab-panel" role="tabpanel">
+								<img class="has-shadow" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=896&q=80" alt="Alps mountains - Pure Sourcing" width="896" height="504">
+								<div class="tab-panel-content" style="margin-top: 24px; padding: 0 16px;">
+									<h3 style="color: #ffffff; margin-bottom: 16px; font-family: 'Montserrat', sans-serif;">Pure Sourcing Process</h3>
+									<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; color: #ffffff;">
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">1. Location Identification</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">We select remote, unpolluted locations like the Swiss Alps, known for their exceptional air quality and pristine natural environment.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">2. Environmental Assessment</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Conduct thorough evaluations to confirm the purity, sustainability, and quality of the air source before collection.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">3. Air Collection</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Utilize specialized equipment to capture air at optimal times without contamination, preserving its natural purity.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">4. Initial Filtration</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Remove any particulates and impurities immediately after collection to maintain the highest level of air purity.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="tab-b" class="tab-panel" role="tabpanel">
+								<img class="has-shadow" src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=896&q=80" alt="Scientists examining chemicals in laboratory - Quality Testing" width="896" height="504">
+								<div class="tab-panel-content" style="margin-top: 24px; padding: 0 16px;">
+									<h3 style="color: #ffffff; margin-bottom: 16px; font-family: 'Montserrat', sans-serif;">Quality Testing Process</h3>
+									<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; color: #ffffff;">
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">1. Purity Analysis</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Test for contaminants and pollutants to ensure the air meets our strict purity standards and quality benchmarks.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">2. Pressure Testing</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Verify can integrity to withstand various conditions without leakage, ensuring product safety and longevity.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">3. Seal Inspection</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Ensure airtight seals are perfect to maintain freshness and prevent contamination throughout the product's lifecycle.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">4. Batch Sampling</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Randomly select cans from each batch for comprehensive quality assurance tests to maintain consistency across all products.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="tab-c" class="tab-panel" role="tabpanel">
+								<img class="has-shadow" src="https://images.unsplash.com/photo-1605745341112-85968b19335b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=896&q=80" alt="Premium Packaging Process" width="896" height="504">
+								<div class="tab-panel-content" style="margin-top: 24px; padding: 0 16px;">
+									<h3 style="color: #ffffff; margin-bottom: 16px; font-family: 'Montserrat', sans-serif;">Premium Packaging Process</h3>
+									<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; color: #ffffff;">
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">1. Design Planning</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Crafting a concept that aligns with BreatheFree's premium brand identity and ensures optimal protection for our canned air products.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">2. Material Selection</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Choosing high-quality, sustainable materials that enhance product appeal and maintain air purity during storage and transit.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">3. Secure Assembly</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Precisely sealing each can in protective cases with reinforced corners and secure latches to ensure freshness and integrity.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">4. Quality Assurance</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Rigorous quality checks ensure every package meets our high standards before being prepared for delivery to customers.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="tab-d" class="tab-panel" role="tabpanel">
+								<img class="has-shadow" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=896&q=80" alt="Fresh Delivery Process" width="896" height="504">
+								<div class="tab-panel-content" style="margin-top: 24px; padding: 0 16px;">
+									<h3 style="color: #ffffff; margin-bottom: 16px; font-family: 'Montserrat', sans-serif;">Fresh Delivery Process</h3>
+									<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; color: #ffffff;">
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">1. Order Processing</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Once your order is placed, our team swiftly prepares it, ensuring all items are accurately picked and verified for quality.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">2. Secure Packaging</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Your premium air cans are carefully packed in protective cases to maintain freshness and prevent damage during transit.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">3. Logistics Coordination</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">We plan efficient delivery routes and schedules to ensure your order arrives promptly and in perfect condition.</p>
+										</div>
+										<div>
+											<h4 style="color: #B0B0B0; margin-bottom: 8px; font-family: 'Montserrat', sans-serif; font-size: 18px;">4. Delivery Execution</h4>
+											<p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; line-height: 1.6;">Professional couriers deliver your package directly to your door, ensuring a positive experience and maintaining product freshness.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="section leader-section">
+				<div class="container">
+					<div class="section-inner">
+						<div class="section-header center-content">
+							<div class="container-xs">
+								<h2 class="mt-0 mb-16 leader-header">Meet the Leader</h2>
+								<p class="mb-0 leader-description">Get to know the visionary behind BreatheFree's premium air collection.</p>
+							</div>
+						</div>
+						<div class="leader-layout" style="display: grid; grid-template-columns: 1fr 2fr; gap: 32px; align-items: start;">
+							<article class="tiles-item reveal-from-bottom" style="max-width: 100%;">
+								<div class="tiles-item-inner has-shadow" style="text-align: center; padding: 48px 32px;">
+									<figure class="news-item-image m-0 mb-24" style="display: flex; justify-content: center;">
+										<img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Manivald Umbjärv" width="300" height="300" class="leader-image">
+									</figure>
+									<div class="news-item-content">
+										<div class="news-item-body">
+											<h3 class="news-item-title h3 mt-0 mb-16 leader-name">
+												Manivald Umbjärv
+											</h3>
+											<div class="button-group" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+												<a class="button button-primary" href="https://www.linkedin.com/in/manivald-umbj%C3%A4rv-00392b352/" target="_blank" rel="noopener noreferrer" style="min-width: 150px;">LinkedIn</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</article>
+							<div class="interview-snippet-container">
+								<h3 class="interview-title">Interview Snippet</h3>
+								<div class="interview-text">
+									<p>"I started BreatheFree because I realized that as AI and technology continue to reshape our world, people are spending more time indoors, disconnected from the natural environments that our bodies and minds truly need."</p>
+									<p>The idea came to me during a research project where I was working with AI systems to analyze air quality data. I noticed that while AI could help us understand pollution patterns and identify pristine locations, it couldn't replace the actual experience of breathing fresh, natural air.</p>
+									<p>Using AI-powered algorithms, we identify the most optimal times and locations for air collection. BreatheFree represents a balance - we use cutting-edge AI technology to enhance our sourcing and quality control processes, but the core product remains untouched by artificial means. It's nature's best, delivered through technology's precision."</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="roadmap section has-top-divider">
+				<div class="container">
+					<div class="roadmap-inner section-inner">
+						<div class="section-header center-content">
+							<div class="container-xs">
+								<h2 class="mt-0 mb-16">Our journey to premium air</h2>
+								<p class="mb-0">Discover our quarterly limited edition air collections, each capturing the essence of the season from the world's most pristine locations. From Arctic Midnight to Lavender Fields, experience exclusive scents available only during their respective seasons.</p>
+							</div>
+						</div>
+						<div class="timeline">
+							<div class="timeline-wrap">
+								<div class="timeline-item">
+									<div class="timeline-item-inner">
+										<div class="timeline-item-header text-color-low tt-u mb-4 reveal-fade">Winter 2024</div>
+										<div class="timeline-item-content fw-700 h4 m-0 reveal-from-side">Limited Edition: Arctic Midnight Air - Captured from the pristine polar regions during the winter solstice</div>
+									</div>
+								</div>
+								<div class="timeline-item">
+									<div class="timeline-item-inner">
+										<div class="timeline-item-header text-color-low tt-u mb-4 reveal-fade">Spring 2025</div>
+										<div class="timeline-item-content fw-700 h4 m-0 reveal-from-side">Limited Edition: Cherry Blossom Breeze - Fresh air from Japanese gardens during peak bloom season</div>
+									</div>
+								</div>
+								<div class="timeline-item">
+									<div class="timeline-item-inner">
+										<div class="timeline-item-header text-color-low tt-u mb-4 reveal-fade">Summer 2025</div>
+										<div class="timeline-item-content fw-700 h4 m-0 reveal-from-side">Limited Edition: Tropical Paradise Air - Exotic air from untouched tropical islands at sunrise</div>
+									</div>
+								</div>
+								<div class="timeline-item">
+									<div class="timeline-item-inner">
+										<div class="timeline-item-header text-color-low tt-u mb-4 reveal-fade">Fall 2025</div>
+										<div class="timeline-item-content fw-700 h4 m-0 reveal-from-side">Limited Edition: Maple Crisp Air - Autumn air from Canadian forests during peak foliage season</div>
+									</div>
+								</div>
+								<div class="timeline-item">
+									<div class="timeline-item-inner">
+										<div class="timeline-item-header text-color-low tt-u mb-4 reveal-fade">Winter 2025</div>
+										<div class="timeline-item-content fw-700 h4 m-0 reveal-from-side">Limited Edition: Fireside Spice Air - Warm, cozy air from alpine cabins with hints of winter spices</div>
+									</div>
+								</div>
+								<div class="timeline-item">
+									<div class="timeline-item-inner">
+										<div class="timeline-item-header text-color-low tt-u mb-4 reveal-fade">Spring 2026</div>
+										<div class="timeline-item-content fw-700 h4 m-0 reveal-from-side">Limited Edition: Lavender Fields Air - Fragrant air from Provence lavender fields at dawn</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="pricing" class="pricing section has-bg-color">
+				<div class="container">
+					<div class="pricing-inner section-inner">
+						<div class="tiles-wrap">
+							<div class="tiles-item reveal-from-bottom">
+								<div class="tiles-item-inner has-shadow">
+									<div class="pricing-item-content">
+										<div class="pricing-item-header pb-24 mb-24">
+											<div class="pricing-item-price mb-8" data-price-output='{
+                                                "0": ["$", "29", "/m"],
+                                                "1": ["$", "29", "/m"],
+                                                "2": ["$", "29", "/m"],
+                                                "3": ["$", "29", "/m"],
+                                                "4": ["$", "29", "/m"],
+                                                "5": ["$", "29", "/m"],
+                                                "6": ["$", "29", "/m"],
+                                                "7": ["$", "29", "/m"],
+                                                "8": ["$", "29", "/m"]
+											}'>
+												<span class="pricing-item-price-currency h3">$</span>
+												<span class="pricing-item-price-amount h1">29</span>
+												<span class="pricing-item-price-after text-sm text-color-low">/m</span>
+											</div>
+											<div class="text-xs text-color-low">Starter Plan</div>
+										</div>
+										<div class="pricing-item-features mb-40">
+											<div class="pricing-item-features-title h6 text-xs text-color-high mb-24">What's included</div>
+											<ul class="pricing-item-features-list list-reset text-xs mb-32">
+												<li class="is-checked">3 cans per month</li>
+												<li class="is-checked">Free shipping</li>
+												<li class="is-checked">Monthly delivery</li>
+												<li>Priority customer support</li>
+												<li>Limited edition collections</li>
+											</ul>
+										</div>
+									</div>
+									<div class="pricing-item-cta mb-8">
+										<a class="button button-primary button-block" href="additional.html">Start subscription</a>
+									</div>
+								</div>
+							</div>
+							<div class="tiles-item reveal-from-bottom" data-reveal-delay="200">
+								<div class="tiles-item-inner has-shadow">
+									<div class="pricing-item-content">
+										<div class="pricing-item-header pb-24 mb-24">
+											<div class="pricing-item-price mb-8" data-price-output='{
+                                                "0": ["$", "49", "/m"],
+                                                "1": ["$", "49", "/m"],
+                                                "2": ["$", "49", "/m"],
+                                                "3": ["$", "49", "/m"],
+                                                "4": ["$", "49", "/m"],
+                                                "5": ["$", "49", "/m"],
+                                                "6": ["$", "49", "/m"],
+                                                "7": ["$", "49", "/m"],
+                                                "8": ["$", "49", "/m"]
+											}'>
+												<span class="pricing-item-price-currency h3">$</span>
+												<span class="pricing-item-price-amount h1">49</span>
+												<span class="pricing-item-price-after text-sm text-color-low">/m</span>
+											</div>
+											<div class="text-xs text-color-low">Premium Plan</div>
+										</div>
+										<div class="pricing-item-features mb-40">
+											<div class="pricing-item-features-title h6 text-xs text-color-high mb-24">What's included</div>
+											<ul class="pricing-item-features-list list-reset text-xs mb-32">
+												<li class="is-checked">6 cans per month</li>
+												<li class="is-checked">Free express shipping</li>
+												<li class="is-checked">Bi-weekly delivery</li>
+												<li class="is-checked">Priority customer support</li>
+												<li>Limited edition collections</li>
+											</ul>
+										</div>
+									</div>
+									<div class="pricing-item-cta mb-8">
+										<a class="button button-primary button-block" href="additional.html">Start subscription</a>
+									</div>
+								</div>
+							</div>
+							<div class="tiles-item reveal-from-bottom" data-reveal-delay="400">
+								<div class="tiles-item-inner has-shadow">
+									<div class="pricing-item-content">
+										<div class="pricing-item-header pb-24 mb-24">
+											<div class="pricing-item-price mb-8" data-price-output='{
+                                                "0": ["$", "79", "/m"],
+                                                "1": ["$", "79", "/m"],
+                                                "2": ["$", "79", "/m"],
+                                                "3": ["$", "79", "/m"],
+                                                "4": ["$", "79", "/m"],
+                                                "5": ["$", "79", "/m"],
+                                                "6": ["$", "79", "/m"],
+                                                "7": ["$", "79", "/m"],
+                                                "8": ["$", "79", "/m"]
+											}'>
+												<span class="pricing-item-price-currency h3">$</span>
+												<span class="pricing-item-price-amount h1">79</span>
+												<span class="pricing-item-price-after text-sm text-color-low">/m</span>
+											</div>
+											<div class="text-xs text-color-low">Elite Plan</div>
+										</div>
+										<div class="pricing-item-features mb-40">
+											<div class="pricing-item-features-title h6 text-xs text-color-high mb-24">What's included</div>
+											<ul class="pricing-item-features-list list-reset text-xs mb-32">
+												<li class="is-checked">10 cans per month</li>
+												<li class="is-checked">Free express shipping</li>
+												<li class="is-checked">Weekly delivery</li>
+												<li class="is-checked">24/7 priority support</li>
+												<li class="is-checked">Exclusive limited editions</li>
+											</ul>
+										</div>
+									</div>
+									<div class="pricing-item-cta mb-8">
+										<a class="button button-primary button-block" href="additional.html">Start subscription</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="cta section center-content-mobile has-bg-color invert-color">
+				<div class="container">
+					<div class="cta-inner section-inner" style="text-align: center; display: flex; justify-content: center; align-items: center;">
+						<a class="button button-primary" href="additional.html" style="font-size: 18px; padding: 16px 48px; min-width: 250px; border-radius: 12px; text-align: center; display: inline-block;">Ready to experience premium air?</a>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="site-footer center-content-mobile invert-color">
+			<div class="container">
+				<div class="site-footer-inner">
+					<div class="footer-top space-between text-xxs">
+						<div class="brand">
+							<a href="index.html" class="brand-link" style="text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 1px;">
+								BreatheFree
+							</a>
+						</div>
+						<div class="footer-social">
+							<ul class="list-reset">
+								<li>
+									<a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+										<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+											<title>Facebook</title>
+											<path d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z"/>
+										</svg>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
+										<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+											<title>Twitter</title>
+											<path d="M16 3c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4C.7 7.7 1.8 9 3.3 9.3c-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H0c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4C15 4.3 15.6 3.7 16 3z"/>
+										</svg>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+										<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+											<title>Instagram</title>
+											<g>
+												<circle cx="12.145" cy="3.892" r="1"/>
+												<path d="M8 12c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4zm0-6c-1.103 0-2 .897-2 2s.897 2 2 2 2-.897 2-2-.897-2-2-2z"/>
+												<path d="M12 16H4c-2.056 0-4-1.944-4-4V4c0-2.056 1.944-4 4-4h8c2.056 0 4 1.944 4 4v8c0 2.056-1.944 4-4 4zM4 2c-.935 0-2 1.065-2 2v8c0 .953 1.047 2 2 2h8c.935 0 2-1.065 2-2V4c0-.935-1.065-2-2-2H4z"/>
+											</g>
+										</svg>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="footer-bottom space-between text-xxs invert-order-desktop">
+						<nav class="footer-nav">
+							<ul class="list-reset">
+								<li>
+									<a href="#" onclick="showContactPopup(); return false;">Contact</a>
+								</li>
+								<li>
+									<a href="#" onclick="showFAQPopup(); return false;">FAQ's</a>
+								</li>
+								<li>
+									<a href="#" onclick="showSupportPopup(); return false;">Support</a>
+								</li>
+							</ul>
+						</nav>
+						<div class="footer-copyright">&copy; 2025 BreatheFree, all rights reserved</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script src="js/main.min.js"></script>
+	<script>
+		function showContactPopup() {
+			alert('Contact Us\n\nEmail: contact@breathefree.com\nPhone: 1-800-BREATHE\nAddress: 123 Fresh Air Avenue, Mountain View, CA 94040\n\nWe\'d love to hear from you!');
+		}
+		
+		function showFAQPopup() {
+			alert('Frequently Asked Questions\n\nQ: How is the air collected?\nA: Our air is sourced from pristine locations using advanced collection methods that preserve its natural purity.\n\nQ: How long does shipping take?\nA: Standard shipping takes 5-7 business days. Express shipping is available for faster delivery.\n\nQ: Can I customize my order?\nA: Yes! Click "Customize your selection" to create your perfect air collection.\n\nQ: Are the cans recyclable?\nA: Absolutely! All our packaging is 100% recyclable and eco-friendly.');
+		}
+		
+		function showSupportPopup() {
+			alert('Customer Support\n\nOur support team is here to help!\n\nHours: Monday-Friday, 9 AM - 6 PM EST\nEmail: support@breathefree.com\nLive Chat: Available on our website\n\nFor urgent matters, please call our 24/7 hotline: 1-800-BREATHE');
+		}
+		
+		// Theme Toggle Functionality
+		function toggleTheme() {
+			const body = document.body;
+			const themeIcon = document.getElementById('theme-icon');
+			const isLightMode = body.classList.toggle('light-mode');
+			
+			// Update icon
+			if (themeIcon) {
+				themeIcon.textContent = isLightMode ? '☀️' : '🌙';
+			}
+			
+			// Save preference
+			localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+		}
+		
+		// Load saved theme preference
+		function loadTheme() {
+			const savedTheme = localStorage.getItem('theme');
+			const body = document.body;
+			const themeIcon = document.getElementById('theme-icon');
+			
+			if (savedTheme === 'light') {
+				body.classList.add('light-mode');
+				if (themeIcon) themeIcon.textContent = '☀️';
+			} else {
+				body.classList.remove('light-mode');
+				if (themeIcon) themeIcon.textContent = '🌙';
+			}
+		}
+		
+		// Initialize theme on page load
+		loadTheme();
+	</script>
+</body>
+</html>
