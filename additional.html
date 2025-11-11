@@ -953,6 +953,20 @@
 			color: rgba(255, 255, 255, 0.6);
 			font-size: 16px;
 		}
+		
+		/* Copyright Text */
+		.copyright-text {
+			text-align: center;
+			padding: 20px;
+			color: rgba(255, 255, 255, 0.6);
+			font-size: 12px;
+			margin-bottom: 140px;
+			transition: color 0.3s ease;
+		}
+		
+		body.light-mode .copyright-text {
+			color: rgba(26, 26, 26, 0.6);
+		}
 	</style>
 </head>
 	<body class="has-animations">
@@ -1388,6 +1402,11 @@
 				</div>
 			</div>
 		</main>
+		
+		<!-- Copyright Text -->
+		<div class="copyright-text">
+			&copy; 2025 BreatheFree, all rights reserved
+		</div>
 		
 		<!-- Scent Notes Modal -->
 		<div class="scent-notes-modal" id="scent-notes-modal" onclick="closeScentNotes(event)">
