@@ -71,6 +71,11 @@
 			padding-bottom: 120px;
 		}
 		
+		.body-wrap .order-summary-strip {
+			position: fixed !important;
+			z-index: 99999 !important;
+		}
+		
 		.site-content {
 			overflow: visible;
 			padding-bottom: 120px;
@@ -91,15 +96,33 @@
 		.site-footer {
 			background-color: rgba(37, 37, 37, 0.95) !important;
 			backdrop-filter: blur(10px);
-			position: relative;
-			z-index: 1;
+			position: relative !important;
+			z-index: 1 !important;
 			margin-bottom: 0;
 			padding-bottom: 120px;
 			transition: background-color 0.3s ease;
 		}
 		
+		.site-footer.invert-color {
+			z-index: 1 !important;
+		}
+		
 		body.light-mode .site-footer {
 			background-color: rgba(255, 255, 255, 0.95) !important;
+		}
+		
+		body.light-mode .site-footer.invert-color {
+			z-index: 1 !important;
+		}
+		
+		.site-footer,
+		.site-footer *,
+		.site-footer .container,
+		.site-footer .site-footer-inner,
+		.site-footer .footer-bottom,
+		.site-footer .footer-copyright {
+			z-index: 1 !important;
+			position: relative !important;
 		}
 		
 		/* Theme Toggle Button */
@@ -703,13 +726,23 @@
 			bottom: 0 !important;
 			left: 0 !important;
 			right: 0 !important;
-			background-color: rgba(42, 42, 42, 0.98);
+			width: 100% !important;
+			background-color: rgba(42, 42, 42, 0.98) !important;
 			backdrop-filter: blur(20px);
 			border-top: 2px solid #808080;
 			padding: 20px;
 			z-index: 99999 !important;
 			box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.5);
 			transition: background-color 0.3s ease, border-color 0.3s ease;
+		}
+		
+		.order-summary-strip,
+		.order-summary-strip *,
+		.order-summary-strip .order-strip-content,
+		.order-summary-strip .order-strip-left,
+		.order-summary-strip .order-strip-right,
+		.order-summary-strip .order-strip-button {
+			z-index: 99999 !important;
 		}
 		
 		body.light-mode .order-summary-strip {
@@ -1323,7 +1356,7 @@
 				</div>
 				
 				<!-- Bottom Order Summary Strip -->
-				<div class="order-summary-strip">
+				<div class="order-summary-strip" style="position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; z-index: 99999 !important;">
 					<div class="order-strip-content">
 						<div class="order-strip-left">
 							<div class="order-strip-item">
@@ -1364,7 +1397,7 @@
 			</div>
 		</div>
 		
-		<footer class="site-footer invert-color">
+		<footer class="site-footer invert-color" style="z-index: 1 !important; position: relative !important;">
 			<div class="container">
 				<div class="site-footer-inner">
 					<div class="footer-bottom space-between center-content-mobile text-xxs">
